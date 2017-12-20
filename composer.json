@@ -1,0 +1,26 @@
+{
+    "name": "aic/data-hub-core",
+    "description": "Shared components for our data hub services.",
+    "type": "library",
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/framework": "5.5.*"
+    },
+    "license": "AGPL-3.0",
+    "authors": [
+        {
+            "name": "Illya Moskvin",
+            "email": "imoskvin@artic.edu"
+        },
+        {
+            "name": "Nikhil Trivedi",
+            "email": "ntrive@artic.edu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aic\\Hub\\Core\\": "src/"
+        }
+    }
+}
