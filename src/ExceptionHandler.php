@@ -31,7 +31,7 @@ class ExceptionHandler extends Handler
     public function report(Exception $exception)
     {
 
-        if ($this->shouldntReport($e)) {
+        if ($this->shouldntReport($exception)) {
             return;
         }
 
@@ -52,7 +52,7 @@ class ExceptionHandler extends Handler
         $is_detailed = $e instanceof AbstractException;
 
         // Laravel's backtrace page is too readable to forgo
-        // Unless we are
+        // Show it for undetailed exceptions on dev env
         if (config('app.debug') && !$is_detailed)
         {
             return parent::render($request, $e);
