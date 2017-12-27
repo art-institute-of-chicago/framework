@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Core\Exceptions;
+namespace Aic\Hub\Foundation\Exceptions;
 
 class DetailedException extends AbstractException
 {

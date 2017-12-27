@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Core;
+namespace Aic\Hub\Foundation;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -8,11 +8,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Closure;
 
-use Aic\Hub\Core\Exceptions\BigLimitException;
-use Aic\Hub\Core\Exceptions\InvalidSyntaxException;
-use Aic\Hub\Core\Exceptions\ItemNotFoundException;
-use Aic\Hub\Core\Exceptions\MethodNotAllowedException;
-use Aic\Hub\Core\Exceptions\TooManyIdsException;
+use Aic\Hub\Foundation\Exceptions\BigLimitException;
+use Aic\Hub\Foundation\Exceptions\InvalidSyntaxException;
+use Aic\Hub\Foundation\Exceptions\ItemNotFoundException;
+use Aic\Hub\Foundation\Exceptions\MethodNotAllowedException;
+use Aic\Hub\Foundation\Exceptions\TooManyIdsException;
 
 use Illuminate\Routing\Controller as BaseController;
 

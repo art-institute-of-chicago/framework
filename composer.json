@@ -1,5 +1,5 @@
 {
-    "name": "aic/data-hub-core",
+    "name": "aic/data-hub-foundation",
     "description": "Shared components for our data hub services.",
     "type": "library",
     "require": {
@@ -20,7 +20,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Aic\\Hub\\Core\\": "src/"
+            "Aic\\Hub\\Foundation\\": "src/"
         }
     }
 }

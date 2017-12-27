@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Core;
+namespace Aic\Hub\Foundation;
 
 use League\Fractal\Serializer\DataArraySerializer;
 

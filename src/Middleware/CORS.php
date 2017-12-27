@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Core\Middleware;
+namespace Aic\Hub\Foundation\Middleware;
 
 use Closure;
 

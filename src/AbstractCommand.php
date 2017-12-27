@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Core;
+namespace Aic\Hub\Foundation;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
