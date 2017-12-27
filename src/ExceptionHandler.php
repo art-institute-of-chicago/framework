@@ -2,9 +2,10 @@
 
 namespace Aic\Hub\Foundation;
 
-use Illuminate\Foundation\Exceptions\Handler;
-use AbstractException;
+use Aic\Hub\Foundation\Exceptions\AbstractException;
 use Exception;
+
+use Illuminate\Foundation\Exceptions\Handler;
 
 class ExceptionHandler extends Handler
 {
@@ -69,7 +70,7 @@ class ExceptionHandler extends Handler
         ];
 
         // For our custom exceptions, output the messages
-        if (!$is_detailed)
+        if ($is_detailed)
         {
             $response['error'] = $e->getMessage();
             $response['detail'] = $e->getDetail();
