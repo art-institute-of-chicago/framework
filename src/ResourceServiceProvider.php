@@ -2,7 +2,7 @@
 
 namespace Aic\Hub\Foundation;
 
-use Aic\Core\ResourceSerializer;
+use Aic\Hub\Foundation\ResourceSerializer;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
