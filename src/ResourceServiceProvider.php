@@ -28,20 +28,11 @@ class ResourceServiceProvider extends ServiceProvider
 
         $fractal->setSerializer( new ResourceSerializer );
 
-        if (isset($_GET['include']))
-        {
-            $includes = $_GET['include'];
-            $includes = snake_case( camel_case( $includes ) );
-            $fractal->parseIncludes( $includes );
-        }
+        // Parse fractal includes and excludes
+        $this->parseFractalParam($fractal, 'include', 'parseIncludes');
+        $this->parseFractalParam($fractal, 'exclude', 'parseExcludes');
 
-        if (isset($_GET['exclude']))
-        {
-            $excludes = $_GET['exclude'];
-            $excludes = snake_case( camel_case( $excludes ) );
-            $fractal->parseExcludes( $excludes );
-        }
-
+        // Define a response macro to output a single resource
         response()->macro('item', function ($item, TransformerAbstract $transformer, $status = 200, array $headers = []) use ($fractal) {
 
             $resource = new Item($item, $transformer);
@@ -54,6 +45,7 @@ class ResourceServiceProvider extends ServiceProvider
 
         });
 
+        // Define a response macro to output multiple resources
         response()->macro('collection', function ($collection, TransformerAbstract $transformer, $status = 200, array $headers = []) use ($fractal) {
 
             $resource = new Collection($collection, $transformer);
@@ -105,6 +97,27 @@ class ResourceServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+    }
+
+    /**
+     * Helper to parse Fractal includes or excludes.
+     *
+     * @link http://fractal.thephpleague.com/transformers/
+     *
+     * @param \League\Fractal\Manager $fractal
+     * @param string $param  Name of query string param to parse
+     * @param string $method  Either `parseIncludes` or `parseExcludes`
+     */
+    private function parseFractalParam( $fractal, $param, $method )
+    {
+
+        if( isset( $_GET[ $param ] ) )
+        {
+            $values = $_GET[ $param ];
+            $values = snake_case( camel_case( $values ) );
+            $fractal->$method( $values );
+        }
 
     }
 
