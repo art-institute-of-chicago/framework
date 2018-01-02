@@ -115,7 +115,19 @@ class ResourceServiceProvider extends ServiceProvider
         if( isset( $_GET[ $param ] ) )
         {
             $values = $_GET[ $param ];
-            $values = snake_case( camel_case( $values ) );
+
+            // Fractal handles this internally, but we do it early for preprocessing
+            if( is_string( $values ) )
+            {
+                $values = explode(',', $values);
+            }
+
+            // Allows for camel, snake, and kebab cases
+            foreach( $values as &$value )
+            {
+                $value = snake_case( camel_case( $value ) );
+            }
+
             $fractal->$method( $values );
         }
 
