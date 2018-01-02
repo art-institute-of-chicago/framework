@@ -17,7 +17,6 @@
             "email": "ntrive@artic.edu"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Aic\\Hub\\Foundation\\": "src/"
