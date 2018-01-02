@@ -39,7 +39,7 @@ class ResourceServiceProvider extends ServiceProvider
         {
             $excludes = $_GET['exclude'];
             $excludes = snake_case( camel_case( $excludes ) );
-            $fractal->parseIncludes( $excludes );
+            $fractal->parseExcludes( $excludes );
         }
 
         response()->macro('item', function ($item, TransformerAbstract $transformer, $status = 200, array $headers = []) use ($fractal) {
