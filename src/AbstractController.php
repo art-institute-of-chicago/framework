@@ -148,7 +148,7 @@ abstract class AbstractController extends BaseController
     protected function find($ids)
     {
 
-        return ($this->model)::instance()->find($ids);
+        return ($this->model)::find($ids);
 
     }
 
