@@ -290,11 +290,7 @@ abstract class AbstractController extends BaseController
 
 
     /**
-     * Validate `id` route or query string param format. By default, only
-     * numeric ids greater than zero are accepted. Override this method in
-     * child classes to implement different validation rules (e.g. UUID).
-     *
-     * @TODO Move this logic to the base model classes?
+     * Validate `id` route or query string param format.
      *
      * @param mixed $id
      * @return boolean
@@ -302,8 +298,7 @@ abstract class AbstractController extends BaseController
     protected function validateId( $id )
     {
 
-        // By default, only allow numeric ids greater than 0
-        return is_numeric($id) && intval($id) > 0;
+        return $model::validateId($id);
 
     }
 
