@@ -25,7 +25,8 @@ class DefaultConfigServiceProvider extends ServiceProvider
     /**
      * This publishes the required `config/app.php` file to your app, which
      * contains the only settings that must live in the app, instead of the
-     * foundation: `providers` and `aliases`. Run this to publish it:
+     * foundation: `providers`, `aliases`, `timezone`, and `env`. Run this
+     * to publish it:
      *
      * php artisan vendor:publish --provider="Aic\Hub\Foundation\DefaultConfigServiceProvider" --force
      *
@@ -52,8 +53,8 @@ class DefaultConfigServiceProvider extends ServiceProvider
      * your app, and omit any first-level keys you don't want to customize.
      *
      * There is one limitation to this approach: you must always include the
-     * `config/app.php` file in your app, with the `providers` and `aliases`
-     * keys. See the `boot` method here for more info.
+     * `config/app.php` file in your app, with a few required keys. See the
+     * `boot` method here for more info.
      *
      * @link https://laravel.com/docs/5.5/packages#resources
      *
