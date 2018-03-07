@@ -298,7 +298,7 @@ abstract class AbstractController extends BaseController
     protected function validateId( $id )
     {
 
-        return $model::validateId($id);
+        return $this->model::validateId($id);
 
     }
 
