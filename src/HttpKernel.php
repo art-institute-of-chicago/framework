@@ -32,6 +32,9 @@ class HttpKernel extends BaseKernel
             'throttle:60,1',
             'bindings',
         ],
+        'web' => [
+            // Needed for Laravel Horizon
+        ],
     ];
 
     /**
