@@ -34,8 +34,22 @@ abstract class AbstractModel extends Model
         parent::boot();
 
         static::addGlobalScope('lastmod', function ($builder) {
-            $builder->orderBy('updated_at', 'desc');
+            $builder->orderBy( self::getTableName() . '.updated_at', 'desc');
         });
+
+    }
+
+    /**
+     * Get this model's table name statically.
+     *
+     * @link https://stackoverflow.com/questions/14082682/how-to-return-database-table-name-in-laravel
+     *
+     * @return string
+     */
+    public static function getTableName()
+    {
+
+        return with(new static)->getTable();
 
     }
 
