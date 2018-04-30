@@ -5,6 +5,7 @@ namespace Aic\Hub\Foundation;
 use Aic\Hub\Foundation\ResourceSerializer;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -112,24 +113,26 @@ class ResourceServiceProvider extends ServiceProvider
     private function parseFractalParam( $fractal, $param, $method )
     {
 
-        if( isset( $_GET[ $param ] ) )
+        $values = Input::get( $param );
+
+        if( !isset( $values ) )
         {
-            $values = $_GET[ $param ];
-
-            // Fractal handles this internally, but we do it early for preprocessing
-            if( is_string( $values ) )
-            {
-                $values = explode(',', $values);
-            }
-
-            // Allows for camel, snake, and kebab cases
-            foreach( $values as &$value )
-            {
-                $value = snake_case( camel_case( $value ) );
-            }
-
-            $fractal->$method( $values );
+            return;
         }
+
+        // Fractal handles this internally, but we do it early for preprocessing
+        if( is_string( $values ) )
+        {
+            $values = explode(',', $values);
+        }
+
+        // Allows for camel, snake, and kebab cases
+        foreach( $values as &$value )
+        {
+            $value = snake_case( camel_case( $value ) );
+        }
+
+        $fractal->$method( $values );
 
     }
 
