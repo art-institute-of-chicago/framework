@@ -74,6 +74,7 @@ class ResourceServiceProvider extends ServiceProvider
                     $paginator['next_url'] = $collection->nextPageUrl() . '&limit=' . $collection->perPage();
                 }
 
+                // Info
                 $info = [
                     'version' => config('app.version')
                 ];
@@ -81,9 +82,14 @@ class ResourceServiceProvider extends ServiceProvider
                 {
                     $info['documentation'] = config('app.documentation_url');
                 }
+                if (config('app.message'))
+                {
+                    $info['message'] = config('app.message');
+                }
 
                 $data = array_merge(['pagination' => $paginator], $data, ['info' => $info]);
 
+                // Config
                 $config = config('app.config_documentation');
 
                 if ($config)
