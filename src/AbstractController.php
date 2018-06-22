@@ -179,11 +179,7 @@ abstract class AbstractController extends BaseController
     protected function select( Request $request, Closure $callback )
     {
 
-        // Technically this will never be called, b/c we only bind Route.get
-        if ($request->method() != 'GET')
-        {
-            throw new MethodNotAllowedException();
-        }
+        $this->validateMethod( $request );
 
         $id = $request->route('id');
 
@@ -217,11 +213,7 @@ abstract class AbstractController extends BaseController
     protected function collect( Request $request, Closure $callback )
     {
 
-        // Technically this will never be called, b/c we only bind Route.get
-        if ($request->method() != 'GET')
-        {
-            throw new MethodNotAllowedException();
-        }
+        $this->validateMethod( $request );
 
         // Process ?ids= query param
         $ids = $request->input('ids');
@@ -299,6 +291,25 @@ abstract class AbstractController extends BaseController
     {
 
         return $this->model::validateId($id);
+
+    }
+
+
+    /**
+     * Throw an exception if the HTTP method is invalid.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return boolean
+     */
+    protected function validateMethod( Request $request )
+    {
+
+        // Technically this will never be called if we only route GET and POST
+        // To respond to all HTTP verbs, call `Route.any`
+        if( !in_array($request->method(), ['GET', 'POST']) )
+        {
+            throw new MethodNotAllowedException();
+        }
 
     }
 
