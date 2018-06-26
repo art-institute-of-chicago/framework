@@ -290,7 +290,12 @@ abstract class AbstractController extends BaseController
     protected function validateId( $id )
     {
 
-        return $this->model::validateId($id);
+        // Only execute this validation if the model has defined a `validateId` method
+        if (method_exists($this->model, 'validateId'))
+        {
+            return $this->model::validateId($id);
+        }
+        return true;
 
     }
 
