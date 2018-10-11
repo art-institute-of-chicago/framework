@@ -16,6 +16,7 @@ class ExceptionHandler extends Handler
      * @var array
      */
     protected $dontReport = [
+        \Symfony\Component\Console\Exception\CommandNotFoundException::class,
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Validation\ValidationException::class,
