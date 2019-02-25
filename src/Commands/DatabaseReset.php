@@ -58,6 +58,13 @@ class DatabaseReset extends BaseCommand
             $table_array = get_object_vars( $table );
             $table_name = $table_array[ key( $table_array ) ];
 
+            // TODO: Require laravel\helpers upon upgrade to [5.8]?
+            if (!empty(DB::getTablePrefix()) && !starts_with($table_name, DB::getTablePrefix()))
+            {
+                $this->line('<fg=blue>Skipped ' . $table_name . '</>');
+                continue;
+            }
+
             switch( $table_array['Table_type'] )
             {
                 case 'VIEW':
