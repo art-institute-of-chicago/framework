@@ -66,20 +66,20 @@ class DatabaseReset extends BaseCommand
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
             if (!empty($table_prefix) && !starts_with($table_name, $table_prefix))
             {
-                $this->line('<fg=blue>Skipped ' . $table_name . '</>');
+                $this->line('<fg=blue>Skipping ' . $table_name . '</>');
                 continue;
             }
 
             switch( $table_array['Table_type'] )
             {
                 case 'VIEW':
+                    $this->warn( 'Dropping view ' . $table_name );
                     DB::statement('DROP VIEW `' . $table_name . '`;');
-                    $this->warn( 'Dropped view ' . $table_name );
                 break;
                 default:
+                    $this->info( 'Dropping table ' . $table_name );
                     $table_name = substr($table_name, strlen($table_prefix));
                     Schema::drop( $table_name );
-                    $this->info( 'Dropped table ' . $table_name );
                 break;
             }
 
