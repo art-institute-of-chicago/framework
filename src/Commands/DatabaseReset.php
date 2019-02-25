@@ -39,6 +39,8 @@ class DatabaseReset extends BaseCommand
             env('APP_ENV') === 'local' || $this->confirm('You aren\'t running in `local` environment. Are you really sure? [y|N]')
         ) && (
             env('APP_ENV') !== 'production' || $this->confirm('You are in production! Are you really, really sure? [y|N]')
+        ) && (
+            !empty(DB::getTablePrefix()) || $this->confirm('Your table prefix is empty. All prefixed tables will be dropped. Continue? [y|N]')
         );
 
     }
@@ -52,6 +54,9 @@ class DatabaseReset extends BaseCommand
         // Specifying `FULL` returns `Table_type`
         $tables = DB::select("SHOW FULL TABLES;");
 
+        // For trimming and ignoring
+        $table_prefix = DB::getTablePrefix();
+
         foreach( $tables as $table )
         {
 
@@ -59,7 +64,7 @@ class DatabaseReset extends BaseCommand
             $table_name = $table_array[ key( $table_array ) ];
 
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
-            if (!empty(DB::getTablePrefix()) && !starts_with($table_name, DB::getTablePrefix()))
+            if (!empty($table_prefix) && !starts_with($table_name, $table_prefix))
             {
                 $this->line('<fg=blue>Skipped ' . $table_name . '</>');
                 continue;
@@ -72,6 +77,7 @@ class DatabaseReset extends BaseCommand
                     $this->warn( 'Dropped view ' . $table_name );
                 break;
                 default:
+                    $table_name = substr($table_name, strlen($table_prefix));
                     Schema::drop( $table_name );
                     $this->info( 'Dropped table ' . $table_name );
                 break;
