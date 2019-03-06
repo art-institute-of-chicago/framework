@@ -3,6 +3,7 @@
 namespace Aic\Hub\Foundation\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Redirect;
 
 class RedirectTrailingSlash
 {
