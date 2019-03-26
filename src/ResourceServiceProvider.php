@@ -83,21 +83,21 @@ class ResourceServiceProvider extends ServiceProvider
 
                 // Info
                 $info = [
-                    'version' => config('app.version')
+                    'version' => config('aic.version')
                 ];
-                if (config('app.documentation_url'))
+                if (config('aic.documentation_url'))
                 {
-                    $info['documentation'] = config('app.documentation_url');
+                    $info['documentation'] = config('aic.documentation_url');
                 }
-                if (config('app.message'))
+                if (config('aic.message'))
                 {
-                    $info['message'] = config('app.message');
+                    $info['message'] = config('aic.message');
                 }
 
                 $data = array_merge(['pagination' => $paginator], $data, ['info' => $info]);
 
                 // Config
-                $config = config('app.config_documentation');
+                $config = config('aic.config_documentation');
 
                 if ($config)
                 {
