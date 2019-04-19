@@ -10,7 +10,8 @@ use Aic\Hub\Foundation\AbstractCommand as BaseCommand;
 class DatabaseReset extends BaseCommand
 {
 
-    protected $signature = 'db:reset';
+    protected $signature = 'db:reset
+                            {--force : Delete without confirmation}';
 
     protected $description = 'Removes all tables in current database';
 
@@ -33,7 +34,7 @@ class DatabaseReset extends BaseCommand
     private function confirmReset()
     {
 
-        return (
+        return $this->option('force') || ((
             $this->confirm('Are you sure you want to drop all tables in `'.env('DB_DATABASE').'`? [y|N]')
         ) && (
             env('APP_ENV') === 'local' || $this->confirm('You aren\'t running in `local` environment. Are you really sure? [y|N]')
@@ -41,7 +42,7 @@ class DatabaseReset extends BaseCommand
             env('APP_ENV') !== 'production' || $this->confirm('You are in production! Are you really, really sure? [y|N]')
         ) && (
             !empty(DB::getTablePrefix()) || $this->confirm('Your table prefix is empty. All prefixed tables will be dropped. Continue? [y|N]')
-        );
+        ));
 
     }
 
