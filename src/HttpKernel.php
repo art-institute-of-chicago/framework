@@ -29,7 +29,6 @@ class HttpKernel extends BaseKernel
      */
     protected $middlewareGroups = [
         'api' => [
-            'throttle:60,1',
             'bindings',
         ],
         'web' => [
@@ -46,6 +45,5 @@ class HttpKernel extends BaseKernel
      */
     protected $routeMiddleware = [
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }
