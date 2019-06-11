@@ -11,12 +11,20 @@ class DatabaseReset extends BaseCommand
 {
 
     protected $signature = 'db:reset
-                            {--force : Delete without confirmation}';
+                            {--force : Delete without confirmation}
+                            {--connection= : Delete without confirmation}';
 
     protected $description = 'Removes all tables in current database';
 
+    private $connection;
+
+    private $db;
+
     public function handle()
     {
+        $this->connection = $this->option('connection') ?? config('database.default');
+
+        $this->db = DB::connection($this->connection);
 
         if( $this->confirmReset() )
         {
@@ -41,7 +49,7 @@ class DatabaseReset extends BaseCommand
         ) && (
             env('APP_ENV') !== 'production' || $this->confirm('You are in production! Are you really, really sure? [y|N]')
         ) && (
-            !empty(DB::getTablePrefix()) || $this->confirm('Your table prefix is empty. All prefixed tables will be dropped. Continue? [y|N]')
+            !empty($this->db->getTablePrefix()) || $this->confirm('Your table prefix is empty. All prefixed tables will be dropped. Continue? [y|N]')
         ));
 
     }
@@ -50,13 +58,13 @@ class DatabaseReset extends BaseCommand
     {
 
         // In case we get interrupted midway
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $this->db->statement('SET FOREIGN_KEY_CHECKS=0;');
 
         // Specifying `FULL` returns `Table_type`
-        $tables = DB::select("SHOW FULL TABLES;");
+        $tables = $this->db->select("SHOW FULL TABLES;");
 
         // For trimming and ignoring
-        $table_prefix = DB::getTablePrefix();
+        $table_prefix = $this->db->getTablePrefix();
 
         foreach( $tables as $table )
         {
@@ -75,18 +83,18 @@ class DatabaseReset extends BaseCommand
             {
                 case 'VIEW':
                     $this->warn( 'Dropping view ' . $table_name );
-                    DB::statement('DROP VIEW `' . $table_name . '`;');
+                    $this->db->statement('DROP VIEW `' . $table_name . '`;');
                 break;
                 default:
                     $this->info( 'Dropping table ' . $table_name );
                     $table_name = substr($table_name, strlen($table_prefix));
-                    Schema::drop( $table_name );
+                    Schema::connection($this->connection)->drop( $table_name );
                 break;
             }
 
         }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->db->statement('SET FOREIGN_KEY_CHECKS=1;');
 
     }
 
