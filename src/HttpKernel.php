@@ -23,6 +23,25 @@ class HttpKernel extends BaseKernel
     ];
 
     /**
+     * The priority-sorted list of middleware.
+     *
+     * Forces non-global middleware to always be in the given order.
+     *
+     * @var array
+     */
+    protected $middlewarePriority = [
+        \Aic\Hub\Foundation\Middleware\ForceAcceptJson::class,
+
+        // Laravel's default order:
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Illuminate\Auth\Middleware\Authenticate::class,
+        \Illuminate\Session\Middleware\AuthenticateSession::class,
+        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        \Illuminate\Auth\Middleware\Authorize::class,
+    ];
+
+    /**
      * The application's route middleware groups.
      *
      * @var array
@@ -30,6 +49,7 @@ class HttpKernel extends BaseKernel
     protected $middlewareGroups = [
         'api' => [
             'bindings',
+            'json',
         ],
         'web' => [
             // Needed for Laravel Horizon
@@ -44,6 +64,7 @@ class HttpKernel extends BaseKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'json' => \Aic\Hub\Foundation\Middleware\ForceAcceptJson::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ];
 }
