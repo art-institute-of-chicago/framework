@@ -3,6 +3,8 @@
 namespace Aic\Hub\Foundation;
 
 use Aic\Hub\Foundation\Exceptions\AbstractException;
+use Aic\Hub\Foundation\Exceptions\UnauthorizedException;
+use Illuminate\Auth\AuthenticationException;
 use Exception;
 
 use Illuminate\Foundation\Exceptions\Handler;
@@ -81,4 +83,15 @@ class ExceptionHandler extends Handler
 
     }
 
+    /**
+     * Avoid redirect to potentially non-existent `login` route, and ensure that the returned
+     * JSON fits our API's error structure. Using `ForceAcceptJson` middleware would also fix
+     * the redirect issue, but not the JSON structure, so let's just override this method.
+     *
+     * @todo: Differentiate between unauthorized and unauthenticated?
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        throw new UnauthorizedException();
+    }
 }
