@@ -64,6 +64,7 @@ class HttpKernel extends BaseKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'json' => \Aic\Hub\Foundation\Middleware\ForceAcceptJson::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ];
