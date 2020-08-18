@@ -17,4 +17,15 @@ class User extends Model implements AuthorizableContract
         'username',
         'api_token',
     ];
+
+    /**
+     * We don't implement Authenticatable, because we don't use passwords or remember tokens,
+     * but we need this work-around for a bug with ThrottleRequest.
+     *
+     * @link https://github.com/laravel/framework/issues/21118
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->id;
+    }
 }
