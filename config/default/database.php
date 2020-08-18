@@ -54,30 +54,6 @@ return [
             'engine' => null,
         ],
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => env('DB_PREFIX', ''),
-            'schema' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => env('DB_PREFIX', ''),
-        ],
-
     ],
 
     /*
@@ -118,3 +94,27 @@ return [
     ],
 
 ];
+
+/*
+|--------------------------------------------------------------------------
+| Userdata Connection
+|--------------------------------------------------------------------------
+|
+| The datahub was built with frangibility in mind. During development and
+| deployment, we often reset the database and recreate it from scratch, or
+| preload and swap out the live data using table prefixes. Data about users
+| is the exception to this rule: it must presist between `db:reset` calls.
+| The `userdata` connection should be identical to the default connection,
+| but it should have a hardcoded prefix that we would never use for source
+| data.
+|
+*/
+
+$config['connections']['userdata'] = array_merge(
+    $config['connections'][$config['default']],
+    [
+        'prefix' => 'auth_',
+    ]
+);
+
+return $config;
