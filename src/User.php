@@ -11,6 +11,8 @@ class User extends Model implements AuthorizableContract
 {
     use Authorizable;
 
+    protected $connection = 'userdata';
+
     protected $fillable = [
         'username',
         'api_token',
