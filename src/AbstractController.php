@@ -84,7 +84,7 @@ abstract class AbstractController extends BaseController
 
         return $this->select( $request, function( $id ) use ( $scope ) {
 
-            return ($this->model)::$scope()->find($id);
+            return $this->getBaseQuery()->$scope()->find($id);
 
         });
 
@@ -104,7 +104,7 @@ abstract class AbstractController extends BaseController
 
         return $this->collect( $request, function( $limit ) use ( $scope ) {
 
-            return ($this->model)::$scope()->paginate($limit);
+            return $this->getBaseQuery()->$scope()->paginate($limit);
 
         });
 
@@ -148,7 +148,7 @@ abstract class AbstractController extends BaseController
     protected function find($ids)
     {
 
-        return ($this->model)::find($ids);
+        return $this->getBaseQuery()->find($ids);
 
     }
 
@@ -163,7 +163,18 @@ abstract class AbstractController extends BaseController
     protected function paginate($limit)
     {
 
-        return ($this->model)::paginate($limit);
+        return $this->getBaseQuery()->paginate($limit);
+
+    }
+
+
+    /**
+     * WEB-1903: Helper to ensure that all items are sorted in reverse chronological order.
+     */
+    protected function getBaseQuery()
+    {
+
+        return ($this->model)::byLastMod();
 
     }
 

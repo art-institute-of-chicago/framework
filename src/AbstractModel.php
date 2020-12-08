@@ -24,19 +24,11 @@ abstract class AbstractModel extends Model
     protected $guarded = [];
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
+     * WEB-1903: For use in API by AbstractController.
      */
-    protected static function boot()
+    public function scopeByLastMod($query)
     {
-
-        parent::boot();
-
-        static::addGlobalScope('lastmod', function ($builder) {
-            $builder->orderBy( self::getTableName() . '.updated_at', 'desc');
-        });
-
+        return $query->orderBy(self::getTableName() . '.updated_at', 'desc');
     }
 
     /**
