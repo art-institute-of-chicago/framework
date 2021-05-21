@@ -51,6 +51,7 @@ class ExceptionHandler extends Handler
      */
     public function render($request, Exception $e)
     {
+        $this->unsetSensitiveData();
 
         $is_detailed = $e instanceof AbstractException;
 
@@ -93,5 +94,19 @@ class ExceptionHandler extends Handler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         throw new UnauthorizedException();
+    }
+
+    /**
+     * Don't ever display sensitive data in Whoops pages.
+     *
+     * @return void
+     */
+    protected function unsetSensitiveData()
+    {
+        foreach ($_ENV as $key => $value) {
+            unset($_SERVER[$key]);
+        }
+
+        $_ENV = [];
     }
 }
