@@ -2,10 +2,12 @@
 
 namespace Aic\Hub\Foundation;
 
+use Aic\Hub\Foundation\Concerns\HasByLastModScope;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
 {
+    use HasByLastModScope;
 
     /**
      * Indicates if the IDs are auto-incrementing. We don't want this in most cases.
@@ -22,28 +24,6 @@ abstract class AbstractModel extends Model
      * @var array
      */
     protected $guarded = [];
-
-    /**
-     * WEB-1903: For use in API by AbstractController.
-     */
-    public function scopeByLastMod($query)
-    {
-        return $query->orderBy(self::getTableName() . '.updated_at', 'desc');
-    }
-
-    /**
-     * Get this model's table name statically.
-     *
-     * @link https://stackoverflow.com/questions/14082682/how-to-return-database-table-name-in-laravel
-     *
-     * @return string
-     */
-    public static function getTableName()
-    {
-
-        return with(new static)->getTable();
-
-    }
 
     /**
      * Validate an id. Useful for validating routes or query string params.
