@@ -2,11 +2,13 @@
 
 namespace Aic\Hub\Foundation;
 
+use Aic\Hub\Foundation\Concerns\CanValidateId;
 use Aic\Hub\Foundation\Concerns\HasByLastModScope;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
 {
+    use CanValidateId;
     use HasByLastModScope;
 
     /**
@@ -24,22 +26,5 @@ abstract class AbstractModel extends Model
      * @var array
      */
     protected $guarded = [];
-
-    /**
-     * Validate an id. Useful for validating routes or query string params.
-     *
-     * By default, only numeric ids greater than zero are accepted. Override this
-     * method in child classes to implement different validation rules (e.g. UUID).
-     *
-     * @param mixed $id
-     * @return boolean
-     */
-    public static function validateId( $id )
-    {
-
-        // By default, only allow numeric ids greater than 0
-        return is_numeric($id) && intval($id) > 0;
-
-    }
 
 }
