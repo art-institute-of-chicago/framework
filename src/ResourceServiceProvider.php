@@ -5,7 +5,7 @@ namespace Aic\Hub\Foundation;
 use Aic\Hub\Foundation\ResourceSerializer;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -144,7 +144,7 @@ class ResourceServiceProvider extends ServiceProvider
     private function parseFractalParam( $fractal, $param, $method )
     {
 
-        $values = Input::get( $param );
+        $values = Request::input( $param );
 
         if( !isset( $values ) )
         {

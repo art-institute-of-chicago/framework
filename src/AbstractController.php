@@ -5,7 +5,7 @@ namespace Aic\Hub\Foundation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Closure;
 
 use Aic\Hub\Foundation\Exceptions\BigLimitException;
@@ -206,7 +206,7 @@ abstract class AbstractController extends BaseController
             throw new ItemNotFoundException();
         }
 
-        $fields = Input::get('fields');
+        $fields = RequestFacade::input('fields');
 
         return response()->item($item, new $this->transformer($fields) );
 
@@ -248,7 +248,7 @@ abstract class AbstractController extends BaseController
         // Assumes the inheriting class set model and transformer
         $all = $callback( $limit, $id );
 
-        $fields = Input::get('fields');
+        $fields = RequestFacade::input('fields');
 
         return response()->collection($all, new $this->transformer($fields) );
 
@@ -285,7 +285,7 @@ abstract class AbstractController extends BaseController
 
         $all = $this->find($ids);
 
-        $fields = Input::get('fields');
+        $fields = RequestFacade::input('fields');
 
         return response()->collection($all, new $this->transformer($fields) );
 
