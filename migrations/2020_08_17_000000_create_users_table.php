@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         $this->schema->create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             // not used for authentication. it's just here for us admins!
             $table->text('username')->nullable();
             // hashed tokens are sha256, i.e. 64-digit hex numbers
