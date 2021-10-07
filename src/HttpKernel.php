@@ -18,7 +18,7 @@ class HttpKernel extends BaseKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Aic\Hub\Foundation\Middleware\CORS::class,
+        \Fruitcake\Cors\HandleCors::class,
         \Aic\Hub\Foundation\Middleware\ETagMiddleware::class,
     ];
 
