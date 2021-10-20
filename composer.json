@@ -3,7 +3,7 @@
     "description": "Shared components for our data hub services.",
     "type": "library",
     "require": {
-        "php": ">=7.2.5",
+        "php": "^7.3|^8.0",
         "laravel/framework": "*",
         "fruitcake/laravel-cors": "^2.0",
         "league/fractal": "^0.16.0",
