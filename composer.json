@@ -5,7 +5,7 @@
     "require": {
         "php": ">=7.2.5",
         "laravel/framework": "*",
-        "league/fractal": "^0.16.0",
+        "league/fractal": "^0.19",
         "doctrine/dbal": "^2.6"
     },
     "license": "AGPL-3.0",
