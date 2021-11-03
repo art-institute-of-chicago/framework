@@ -5,7 +5,7 @@ namespace Aic\Hub\Foundation;
 use Aic\Hub\Foundation\Exceptions\AbstractException;
 use Aic\Hub\Foundation\Exceptions\UnauthorizedException;
 use Illuminate\Auth\AuthenticationException;
-use Exception;
+use Throwable;
 
 use Illuminate\Foundation\Exceptions\Handler;
 
@@ -29,10 +29,10 @@ class ExceptionHandler extends Handler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         if (app()->bound('sentry') && $this->shouldReport($exception)) {
             app('sentry')->captureException($exception);
@@ -46,10 +46,10 @@ class ExceptionHandler extends Handler
      * Render an exception into an HTTP response. We assume that the request always wants JSON.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception $e
+     * @param  \Throwable $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Throwable $e)
     {
         $this->unsetSensitiveData();
 
