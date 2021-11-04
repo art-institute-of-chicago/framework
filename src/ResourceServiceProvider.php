@@ -13,6 +13,8 @@ use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\Collection;
 
+use Illuminate\Support\Str;
+
 class ResourceServiceProvider extends ServiceProvider
 {
 
@@ -160,7 +162,7 @@ class ResourceServiceProvider extends ServiceProvider
         // Allows for camel, snake, and kebab cases
         foreach( $values as &$value )
         {
-            $value = snake_case( camel_case( $value ) );
+            $value = Str::snake( Str::camel( $value ) );
         }
 
         $fractal->$method( $values );
