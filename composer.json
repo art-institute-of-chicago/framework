@@ -27,6 +27,11 @@
         }
     },
     "extra": {
+        "laravel": {
+            "providers": [
+                "Aic\\Hub\\Foundation\\Providers\\FoundationServiceProvider"
+            ]
+        },
         "patches": {
             "laravel/framework": [
                 {
