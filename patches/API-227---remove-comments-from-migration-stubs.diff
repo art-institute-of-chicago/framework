@@ -1,0 +1,82 @@
+diff --git a/src/Illuminate/Database/Migrations/stubs/migration.create.stub b/src/Illuminate/Database/Migrations/stubs/migration.create.stub
+index f4a56a0774dd3cbe107edba90823aaaa4a93918d..2c7300ec07155b5347819830ff11a8ad58c50cd5 100755
+--- a/src/Illuminate/Database/Migrations/stubs/migration.create.stub
++++ b/src/Illuminate/Database/Migrations/stubs/migration.create.stub
+@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
+ 
+ class {{ class }} extends Migration
+ {
+-    /**
+-     * Run the migrations.
+-     *
+-     * @return void
+-     */
+     public function up()
+     {
+         Schema::create('{{ table }}', function (Blueprint $table) {
+@@ -19,11 +14,6 @@ class {{ class }} extends Migration
+         });
+     }
+ 
+-    /**
+-     * Reverse the migrations.
+-     *
+-     * @return void
+-     */
+     public function down()
+     {
+         Schema::dropIfExists('{{ table }}');
+diff --git a/src/Illuminate/Database/Migrations/stubs/migration.stub b/src/Illuminate/Database/Migrations/stubs/migration.stub
+index fd0e4378566d745c3de2359f637cc2c1d93e28ed..b47db851d721d096b5cd233c08c31af34cd2ae87 100755
+--- a/src/Illuminate/Database/Migrations/stubs/migration.stub
++++ b/src/Illuminate/Database/Migrations/stubs/migration.stub
+@@ -6,21 +6,11 @@ use Illuminate\Support\Facades\Schema;
+ 
+ class {{ class }} extends Migration
+ {
+-    /**
+-     * Run the migrations.
+-     *
+-     * @return void
+-     */
+     public function up()
+     {
+         //
+     }
+ 
+-    /**
+-     * Reverse the migrations.
+-     *
+-     * @return void
+-     */
+     public function down()
+     {
+         //
+diff --git a/src/Illuminate/Database/Migrations/stubs/migration.update.stub b/src/Illuminate/Database/Migrations/stubs/migration.update.stub
+index f1a04ebe54d727588c359faa3d8d9b973931e563..ffeced2e5449b24e6c94042102f115d484ff8b36 100755
+--- a/src/Illuminate/Database/Migrations/stubs/migration.update.stub
++++ b/src/Illuminate/Database/Migrations/stubs/migration.update.stub
+@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
+ 
+ class {{ class }} extends Migration
+ {
+-    /**
+-     * Run the migrations.
+-     *
+-     * @return void
+-     */
+     public function up()
+     {
+         Schema::table('{{ table }}', function (Blueprint $table) {
+@@ -18,11 +13,6 @@ class {{ class }} extends Migration
+         });
+     }
+ 
+-    /**
+-     * Reverse the migrations.
+-     *
+-     * @return void
+-     */
+     public function down()
+     {
+         Schema::table('{{ table }}', function (Blueprint $table) {

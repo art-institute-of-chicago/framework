@@ -7,7 +7,8 @@
         "laravel/framework": "*",
         "fruitcake/laravel-cors": "^2.0",
         "league/fractal": "^0.16.0",
-        "doctrine/dbal": "^2.6"
+        "doctrine/dbal": "^2.6",
+        "netresearch/composer-patches-plugin": "~1.0"
     },
     "license": "AGPL-3.0",
     "authors": [
@@ -23,6 +24,16 @@
     "autoload": {
         "psr-4": {
             "Aic\\Hub\\Foundation\\": "src/"
+        }
+    },
+    "extra": {
+        "patches": {
+            "laravel/framework": [
+                {
+                    "title": "API-227: Remove comments from migration stubs",
+                    "url": "vendor/aic/data-hub-foundation/patches/API-227---remove-comments-from-migration-stubs.diff"
+                }
+            ]
         }
     }
 }
