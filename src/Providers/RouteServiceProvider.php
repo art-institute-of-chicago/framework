@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Foundation;
+namespace Aic\Hub\Foundation\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

@@ -54,9 +54,9 @@ return [
         /*
          * Foundation Service Providers...
          */
-        Aic\Hub\Foundation\DefaultConfigServiceProvider::class,
-        Aic\Hub\Foundation\ResourceServiceProvider::class,
-        Aic\Hub\Foundation\RouteServiceProvider::class,
+        Aic\Hub\Foundation\Providers\DefaultConfigServiceProvider::class,
+        Aic\Hub\Foundation\Providers\ResourceServiceProvider::class,
+        Aic\Hub\Foundation\Providers\RouteServiceProvider::class,
 
     ],
 

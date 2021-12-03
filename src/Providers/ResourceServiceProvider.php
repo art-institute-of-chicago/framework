@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Foundation;
+namespace Aic\Hub\Foundation\Providers;
 
 use Aic\Hub\Foundation\ResourceSerializer;
 

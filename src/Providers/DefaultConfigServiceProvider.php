@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Foundation;
+namespace Aic\Hub\Foundation\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -28,7 +28,7 @@ class DefaultConfigServiceProvider extends ServiceProvider
      * foundation: `providers`, `aliases`, `timezone`, and `env`. Run this
      * to publish it:
      *
-     * php artisan vendor:publish --provider="Aic\Hub\Foundation\DefaultConfigServiceProvider" --force
+     * php artisan vendor:publish --provider="Aic\Hub\Foundation\Providers\DefaultConfigServiceProvider" --force
      *
      * Note the quotes. This will overwrite your existing `config/app.php`.
      *
