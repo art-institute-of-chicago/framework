@@ -100,6 +100,7 @@ $config->setRules([
     'no_trailing_comma_in_singleline_array' => true, // PHP single-line arrays should not have trailing comma.
     'no_trailing_whitespace' => true,       // Remove trailing whitespace at the end of non-blank lines.
     'no_trailing_whitespace_in_comment' => true, // There MUST be no trailing spaces inside comment or PHPDoc.
+    'no_unneeded_control_parentheses' => true, // Removes unneeded parentheses around control statements.
     'no_unneeded_curly_braces' => true,     // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
     'no_unset_cast' => true,                // Variables must be set null instead of using (unset) casting.
     'no_unused_imports' => true,            // Unused use statements must be removed.
