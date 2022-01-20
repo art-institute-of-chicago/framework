@@ -19,7 +19,6 @@ abstract class AbstractTransformer extends TransformerAbstract
      */
     protected $fields;
 
-
     /**
      * Be sure to call parent::__construct() if you overwrite this.
      * Otherwise, you will lose field-filtering functionality.

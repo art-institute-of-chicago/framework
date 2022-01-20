@@ -6,7 +6,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Laravel\Sanctum\HasApiTokens;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements AuthorizableContract

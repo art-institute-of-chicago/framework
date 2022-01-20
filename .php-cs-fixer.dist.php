@@ -81,6 +81,7 @@ $config->setRules([
     'no_empty_comment' => true,             // There should not be any empty comments.
     'no_empty_phpdoc' => true,              // There should not be empty PHPDoc blocks.
     'no_empty_statement' => true,           // Remove useless (semicolon) statements.
+    'no_extra_blank_lines' => true,         // Removes extra blank lines and/or blank lines following configuration.
     'no_leading_import_slash' => true,      // Remove leading slashes in use clauses.
     'no_leading_namespace_whitespace' => true, // The namespace declaration line shouldn't contain leading whitespace.
     'no_mixed_echo_print' => true,          // Either language construct print or echo should be used.

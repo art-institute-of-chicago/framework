@@ -111,7 +111,6 @@ class ResourceServiceProvider extends ServiceProvider
 
                 }
 
-
             }
 
             return response()->json(

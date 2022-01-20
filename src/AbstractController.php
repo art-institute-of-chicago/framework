@@ -22,7 +22,6 @@ abstract class AbstractController extends BaseController
 
     protected $transformer;
 
-
     /**
      * A maximum of this many items will be shown per page before erroring.
      * You might run into URL length limits when requesting multiple IDs.
@@ -30,7 +29,6 @@ abstract class AbstractController extends BaseController
      * @var integer
      */
     const LIMIT_MAX = 1000;
-
 
     /**
      * Display the specified resource.
@@ -49,7 +47,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +62,6 @@ abstract class AbstractController extends BaseController
         });
 
     }
-
 
     /**
      * Display the specified resource, but use the route name as a scope on the model.
@@ -86,7 +82,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Display a listing of the resource, but use the route name as a scope on the model.
      *
@@ -104,7 +99,6 @@ abstract class AbstractController extends BaseController
         });
 
     }
-
 
     /**
      * Extract name of scope method from request string.
@@ -131,7 +125,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Call to find specific id(s). Override this method when logic to get
      * a model is more complex than a simple `$model::find($id)` call.
@@ -145,7 +138,6 @@ abstract class AbstractController extends BaseController
         return $this->getBaseQuery()->find($ids);
 
     }
-
 
     /**
      * Call to get a model list. Override this method when logic to get
@@ -161,7 +153,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * WEB-1903: Helper to ensure that all items are sorted in reverse chronological order.
      */
@@ -171,7 +162,6 @@ abstract class AbstractController extends BaseController
         return ($this->model)::byLastMod();
 
     }
-
 
     /**
      * Return a single resource. Not meant to be called directly in routes.
@@ -203,7 +193,6 @@ abstract class AbstractController extends BaseController
         return response()->item($item, new $this->transformer($fields));
 
     }
-
 
     /**
      * Return a list of resources. Not meant to be called directly in routes.
@@ -244,7 +233,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Display multiple resources.
      *
@@ -281,7 +269,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Validate `id` route or query string param format.
      *
@@ -301,7 +288,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Throw an exception if the HTTP method is invalid.
      *
@@ -319,7 +305,6 @@ abstract class AbstractController extends BaseController
 
     }
 
-
     /**
      * Utility getter for transformer assoc. w/ this controller.
      *
@@ -330,7 +315,6 @@ abstract class AbstractController extends BaseController
         return $this->transformer;
 
     }
-
 
     /**
      * Utility getter for model assoc. w/ this controller.
