@@ -39,15 +39,15 @@ abstract class AbstractTransformer extends TransformerAbstract
     private function getFields($fields = null)
     {
 
-        if(!$fields) {
+        if (!$fields) {
             return null;
         }
 
-        if(is_array($fields)) {
+        if (is_array($fields)) {
             return $fields;
         }
 
-        if(is_string($fields)) {
+        if (is_string($fields)) {
             return explode(',', $fields);
         }
 
@@ -67,12 +67,12 @@ abstract class AbstractTransformer extends TransformerAbstract
     public function transform($input)
     {
 
-        if($input instanceof Model)
+        if ($input instanceof Model)
         {
             $input = $input->toArray();
         }
 
-        if(!is_array($input))
+        if (!is_array($input))
         {
             throw \InvalidArgumentException('Transformer expects array or model.');
         }
@@ -90,7 +90,7 @@ abstract class AbstractTransformer extends TransformerAbstract
     protected function filterFields($data)
     {
 
-        if(is_null($this->fields)) {
+        if (is_null($this->fields)) {
             return $data;
         }
 

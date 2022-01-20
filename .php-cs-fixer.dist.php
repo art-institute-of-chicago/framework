@@ -120,6 +120,7 @@ $config->setRules([
     'single_line_after_imports' => true,    // Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.
     'single_line_comment_style' => true,    // Single-line comments and multi-line comments with only one line of actual content should use the // syntax.
     'single_quote' => true,                 // Convert double quotes to single quotes for simple strings.
+    'single_space_after_construct' => true, // Ensures a single space after language constructs.
     'standardize_not_equals' => true,       // Replace all <> with !=.
     'switch_case_semicolon_to_colon' => true, // A case should be followed by a colon and not a semicolon.
     'switch_case_space' => true,            // Removes extra spaces between colon and case value.

@@ -26,7 +26,7 @@ class DatabaseReset extends BaseCommand
 
         $this->db = DB::connection($this->connection);
 
-        if($this->confirmReset())
+        if ($this->confirmReset())
         {
 
             $this->dropTables();
@@ -66,7 +66,7 @@ class DatabaseReset extends BaseCommand
         // For trimming and ignoring
         $table_prefix = $this->db->getTablePrefix();
 
-        foreach($tables as $table)
+        foreach ($tables as $table)
         {
 
             $table_array = get_object_vars($table);
@@ -80,7 +80,7 @@ class DatabaseReset extends BaseCommand
                 continue;
             }
 
-            switch($table_array['Table_type'])
+            switch ($table_array['Table_type'])
             {
                 case 'VIEW':
                     $this->warn('Dropping view ' . $table_name);

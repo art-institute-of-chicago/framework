@@ -150,19 +150,19 @@ class ResourceServiceProvider extends ServiceProvider
 
         $values = Request::input($param);
 
-        if(!isset($values))
+        if (!isset($values))
         {
             return;
         }
 
         // Fractal handles this internally, but we do it early for preprocessing
-        if(is_string($values))
+        if (is_string($values))
         {
             $values = explode(',', $values);
         }
 
         // Allows for camel, snake, and kebab cases
-        foreach($values as &$value)
+        foreach ($values as &$value)
         {
             $value = Str::snake(Str::camel($value));
         }

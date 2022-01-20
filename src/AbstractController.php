@@ -116,7 +116,7 @@ abstract class AbstractController extends BaseController
         $scope = lcfirst($param);
         $method = 'scope' . $scope;
 
-        if(!method_exists($this->model, $method))
+        if (!method_exists($this->model, $method))
         {
             throw new \BadFunctionCallException('Class ' . $this->model . ' has no scope named `' . $scope . '`');
         }
@@ -251,7 +251,7 @@ abstract class AbstractController extends BaseController
         }
 
         // Validate the syntax for each $id
-        foreach($ids as $id)
+        foreach ($ids as $id)
         {
 
             if (!$this->validateId($id))
@@ -298,7 +298,7 @@ abstract class AbstractController extends BaseController
 
         // Technically this will never be called if we only route GET and POST
         // To respond to all HTTP verbs, call `Route.any`
-        if(!in_array($request->method(), ['GET', 'POST']))
+        if (!in_array($request->method(), ['GET', 'POST']))
         {
             throw new MethodNotAllowedException();
         }

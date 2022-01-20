@@ -65,7 +65,7 @@ class DefaultConfigServiceProvider extends ServiceProvider
 
         $files = glob($this->defaultConfigPath . '/*.php');
 
-        foreach($files as $file)
+        foreach ($files as $file)
         {
 
             // https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
