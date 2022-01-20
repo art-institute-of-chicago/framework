@@ -106,6 +106,7 @@ $config->setRules([
     'no_unused_imports' => true,            // Unused use statements must be removed.
     'no_useless_else' => true,              // There should not be useless else cases.
     'no_useless_return' => true,            // There should not be an empty return statement at the end of a function.
+    'no_whitespace_before_comma_in_array' => true, // In array declaration, there MUST NOT be a whitespace before each comma.
     'no_whitespace_in_blank_line' => true,  // Remove trailing whitespace at the end of blank lines.
     'normalize_index_brace' => true,        // Array index should always be written by using square braces.
     'object_operator_without_whitespace' => true, // There should not be space before or after object operators -> and ?->.
