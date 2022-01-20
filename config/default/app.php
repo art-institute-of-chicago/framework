@@ -17,52 +17,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Version
-    |--------------------------------------------------------------------------
-    |
-    | This value is the version of your application. This value is used when
-    | the framework needs to place the application's version in a notification
-    | or any other location as required by the application or its packages.
-    */
-
-    'version' => '0.1',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Documentation
-    |--------------------------------------------------------------------------
-    |
-    | A URL to where you can find documentation on the API.
-    */
-
-    'documentation_url' => env('APP_DOCUMENTATION_URL', null),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Message
-    |--------------------------------------------------------------------------
-    |
-    | A short notice to appear at the bottom of each API call
-    */
-
-    'message' => env('APP_MESSAGE', null),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Configuration Documentation
-    |--------------------------------------------------------------------------
-    |
-    | An array of key-value pairs that will be output at the bottom of each
-    | call to the API. This is useful to convey things like URLs to other
-    | systems the returned data relies on to function. For example, if one of
-    | the fields is `image` and the file name needs to be retrieved from a
-    | particular server, you can document the server here.
-    */
-
-    'config_documentation' => [],
-
-    /*
-    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
@@ -102,6 +56,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Faker Locale
+    |--------------------------------------------------------------------------
+    |
+    | This locale will be used by the Faker PHP library when generating fake
+    | data for your database seeds. For example, this will be used to get
+    | localized telephone numbers, street address information and more.
+    |
+    */
+
+    'faker_locale' => 'en_US',
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |
@@ -114,20 +81,5 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'single'),
 
 ];

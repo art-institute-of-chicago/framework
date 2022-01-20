@@ -12,24 +12,23 @@ class DefaultConfigServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    private $defaultConfigPath = __DIR__ . '/../config/default';
+    private $defaultConfigPath = __DIR__ . '/../../config/default';
 
     /**
      * Path to directory where published config files are stored.
      *
      * @var string
      */
-    private $publishConfigPath = __DIR__ . '/../config/publish';
+    private $publishConfigPath = __DIR__ . '/../../config/publish';
 
     /**
-     * This publishes the required `config/app.php` file to your app, which
-     * contains the only settings that must live in the app, instead of the
-     * foundation: `providers`, `aliases`, `timezone`, and `env`. Run this
-     * to publish it:
+     * This publishes the required `config` files to your app, which from
+     * testing contain the only settings that *must* live in the app,
+     * instead of the foundation. Run this to publish them:
      *
      * php artisan vendor:publish --provider="Aic\Hub\Foundation\Providers\DefaultConfigServiceProvider" --force
      *
-     * Note the quotes. This will overwrite your existing `config/app.php`.
+     * Note the quotes. This may overwrite your existing `config` files!
      *
      * @return void
      */
@@ -37,6 +36,8 @@ class DefaultConfigServiceProvider extends ServiceProvider
     {
         $this->publishes([
             $this->publishConfigPath . '/app.php' => config_path('app.php'),
+            $this->publishConfigPath . '/databases.php' => config_path('databases.php'),
+            $this->publishConfigPath . '/view.php' => config_path('view.php'),
         ]);
     }
 
