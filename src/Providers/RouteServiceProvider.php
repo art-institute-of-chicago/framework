@@ -3,27 +3,17 @@
 namespace Aic\Hub\Foundation\Providers;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseServiceProvider;
 
-class RouteServiceProvider extends ServiceProvider
+class RouteServiceProvider extends BaseServiceProvider
 {
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
+    protected $namespace = 'App\\Http\\Controllers';
+
     public function map()
     {
         $this->mapApiRoutes();
     }
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
     protected function mapApiRoutes()
     {
         Route::prefix('api')
