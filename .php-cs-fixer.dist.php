@@ -36,6 +36,7 @@ $config->setRules([
             'while',
         ],
     ],
+    'cast_spaces' => true,                  // A single space should be between cast and variable.
     'class_definition' => [                 // Whitespace around the keywords of a class, trait or interfaces definition should be one space.
         'multi_line_extends_each_single_line' => true,
         'single_item_single_line' => true,
