@@ -28,7 +28,7 @@ class MakeUser extends BaseCommand
         }
 
         if ($user) {
-            $successPrefix = 'User "' . $username .'" has been updated!';
+            $successPrefix = 'User "' . $username . '" has been updated!';
         } else {
             $successPrefix = 'New API user "' . $username . '" created!';
         }

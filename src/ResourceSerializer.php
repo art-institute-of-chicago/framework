@@ -8,13 +8,12 @@ class ResourceSerializer extends DataArraySerializer
 {
 
    /**
-     * Serialize a collection.
-     *
-     * @param string $resourceKey
-     * @param array  $data
-     *
-     * @return array
-     */
+    * Serialize a collection.
+    *
+    * @param string $resourceKey
+    *
+    * @return array
+    */
     public function collection($resourceKey, array $data)
     {
 
@@ -22,7 +21,7 @@ class ResourceSerializer extends DataArraySerializer
             return $data;
         }
 
-        return array($resourceKey ?: 'data' => $data);
+        return [$resourceKey ?: 'data' => $data];
 
     }
 
@@ -30,7 +29,6 @@ class ResourceSerializer extends DataArraySerializer
      * Serialize an item.
      *
      * @param string $resourceKey
-     * @param array  $data
      *
      * @return array
      */
@@ -41,7 +39,7 @@ class ResourceSerializer extends DataArraySerializer
             return $data;
         }
 
-        return array($resourceKey ?: 'data' => $data);
+        return [$resourceKey ?: 'data' => $data];
 
     }
 

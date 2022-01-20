@@ -18,7 +18,7 @@ class DatabaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Connection::resolverFor('mysql', function($connection, $database, $prefix, $config) {
+        Connection::resolverFor('mysql', function ($connection, $database, $prefix, $config) {
             return new MySqlConnection($connection, $database, $prefix, $config);
         });
     }

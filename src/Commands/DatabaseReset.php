@@ -26,7 +26,7 @@ class DatabaseReset extends BaseCommand
 
         $this->db = DB::connection($this->connection);
 
-        if( $this->confirmReset() )
+        if($this->confirmReset())
         {
 
             $this->dropTables();
@@ -43,7 +43,7 @@ class DatabaseReset extends BaseCommand
     {
 
         return $this->option('force') || ((
-            $this->confirm('Are you sure you want to drop all tables in `'.env('DB_DATABASE').'`? [y|N]')
+            $this->confirm('Are you sure you want to drop all tables in `' . env('DB_DATABASE') . '`? [y|N]')
         ) && (
             env('APP_ENV') === 'local' || $this->confirm('You aren\'t running in `local` environment. Are you really sure? [y|N]')
         ) && (
@@ -61,34 +61,37 @@ class DatabaseReset extends BaseCommand
         $this->db->statement('SET FOREIGN_KEY_CHECKS=0;');
 
         // Specifying `FULL` returns `Table_type`
-        $tables = $this->db->select("SHOW FULL TABLES;");
+        $tables = $this->db->select('SHOW FULL TABLES;');
 
         // For trimming and ignoring
         $table_prefix = $this->db->getTablePrefix();
 
-        foreach( $tables as $table )
+        foreach($tables as $table)
         {
 
-            $table_array = get_object_vars( $table );
-            $table_name = $table_array[ key( $table_array ) ];
+            $table_array = get_object_vars($table);
+            $table_name = $table_array[ key($table_array) ];
 
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
             if (!empty($table_prefix) && !starts_with($table_name, $table_prefix))
             {
                 $this->line('<fg=blue>Skipping ' . $table_name . '</>');
+
                 continue;
             }
 
-            switch( $table_array['Table_type'] )
+            switch($table_array['Table_type'])
             {
                 case 'VIEW':
-                    $this->warn( 'Dropping view ' . $table_name );
+                    $this->warn('Dropping view ' . $table_name);
                     $this->db->statement('DROP VIEW `' . $table_name . '`;');
+
                 break;
                 default:
-                    $this->info( 'Dropping table ' . $table_name );
+                    $this->info('Dropping table ' . $table_name);
                     $table_name = substr($table_name, strlen($table_prefix));
-                    Schema::connection($this->connection)->drop( $table_name );
+                    Schema::connection($this->connection)->drop($table_name);
+
                 break;
             }
 

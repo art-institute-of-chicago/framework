@@ -12,8 +12,6 @@ class MySqlGrammar extends Grammar
      *
      * @link https://dev.mysql.com/doc/refman/5.5/en/replace.html
      *
-     * @param  \Aic\Hub\Foundation\Library\Database\Query\MySqlBuilder  $query
-     * @param  array  $values
      * @return string
      */
     public function compileReplace(Builder $query, array $values)
@@ -23,7 +21,7 @@ class MySqlGrammar extends Grammar
         // basic routine regardless of an amount of records given to us to insert.
         $table = $this->wrapTable($query->from);
 
-        if (! is_array(reset($values))) {
+        if (!is_array(reset($values))) {
             $values = [$values];
         }
 
@@ -35,12 +33,12 @@ class MySqlGrammar extends Grammar
         $parameters = [];
 
         foreach ($values as $record) {
-            $parameters[] = '('.$this->parameterize($record).')';
+            $parameters[] = '(' . $this->parameterize($record) . ')';
         }
 
         $parameters = implode(', ', $parameters);
 
-        return "replace into $table ($columns) values $parameters";
+        return "replace into ${table} (${columns}) values ${parameters}";
     }
 
     /**
@@ -48,8 +46,6 @@ class MySqlGrammar extends Grammar
      *
      * @link https://dev.mysql.com/doc/refman/5.5/en/insert.html
      *
-     * @param  \Aic\Hub\Foundation\Library\Database\Query\MySqlBuilder  $query
-     * @param  array  $values
      * @return string
      */
     public function compileInsertIgnore(Builder $query, array $values)
@@ -59,7 +55,7 @@ class MySqlGrammar extends Grammar
         // basic routine regardless of an amount of records given to us to insert.
         $table = $this->wrapTable($query->from);
 
-        if (! is_array(reset($values))) {
+        if (!is_array(reset($values))) {
             $values = [$values];
         }
 
@@ -71,12 +67,12 @@ class MySqlGrammar extends Grammar
         $parameters = [];
 
         foreach ($values as $record) {
-            $parameters[] = '('.$this->parameterize($record).')';
+            $parameters[] = '(' . $this->parameterize($record) . ')';
         }
 
         $parameters = implode(', ', $parameters);
 
-        return "insert ignore into $table ($columns) values $parameters";
+        return "insert ignore into ${table} (${columns}) values ${parameters}";
     }
 
     /**
@@ -85,8 +81,6 @@ class MySqlGrammar extends Grammar
      * @link https://dev.mysql.com/doc/refman/8.0/en/insert-on-duplicate.html
      * @link https://gist.github.com/RuGa/5354e44883c7651fd15c
      *
-     * @param  \Aic\Hub\Foundation\Library\Database\Query\MySqlBuilder  $query
-     * @param  array  $values
      * @return string
      */
     public function compileInsertUpdate(Builder $query, array $values)
@@ -106,8 +100,8 @@ class MySqlGrammar extends Grammar
 
         $updates = implode(',', array_map(function ($columnName) {
             return $this->wrap($columnName) . ' = VALUES(' . $this->wrap($columnName) . ')';
-        }, $columnNames ));
+        }, $columnNames));
 
-        return "INSERT INTO $table ($columns) VALUES $parameters ON DUPLICATE KEY UPDATE $updates";
+        return "INSERT INTO ${table} (${columns}) VALUES ${parameters} ON DUPLICATE KEY UPDATE ${updates}";
     }
 }

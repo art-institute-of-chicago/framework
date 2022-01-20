@@ -9,7 +9,6 @@ class MySqlBuilder extends QueryBuilder
     /**
      * Insert a new record into the database, replace on primary key conflict.
      *
-     * @param  array  $values
      * @return bool
      */
     public function replace(array $values)
@@ -21,7 +20,7 @@ class MySqlBuilder extends QueryBuilder
         // Since every insert gets treated like a batch insert, we will make sure the
         // bindings are structured in a way that is convenient for building these
         // inserts statements by verifying the elements are actually an array.
-        if (! is_array(reset($values))) {
+        if (!is_array(reset($values))) {
             $values = [$values];
         }
 
@@ -59,7 +58,6 @@ class MySqlBuilder extends QueryBuilder
     /**
      * Insert a new record into the database, update on primary key conflict.
      *
-     * @param  array  $values
      * @return bool
      */
     public function insertUpdate(array $values)
@@ -71,7 +69,7 @@ class MySqlBuilder extends QueryBuilder
         // Since every insert gets treated like a batch insert, we will make sure the
         // bindings are structured in a way that is convenient for building these
         // inserts statements by verifying the elements are actually an array.
-        if (! is_array(reset($values))) {
+        if (!is_array(reset($values))) {
             $values = [$values];
         }
 
@@ -107,7 +105,6 @@ class MySqlBuilder extends QueryBuilder
     /**
      * Insert a new record into the database, discard on primary key conflict.
      *
-     * @param  array  $values
      * @return bool
      */
     public function insertIgnore(array $values)
@@ -119,7 +116,7 @@ class MySqlBuilder extends QueryBuilder
         // Since every insert gets treated like a batch insert, we will make sure the
         // bindings are structured in a way that is convenient for building these
         // inserts statements by verifying the elements are actually an array.
-        if (! is_array(reset($values))) {
+        if (!is_array(reset($values))) {
             $values = [$values];
         }
 

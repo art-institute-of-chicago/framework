@@ -14,7 +14,7 @@ trait CanValidateId
      * @param mixed $id
      * @return boolean
      */
-    public static function validateId( $id )
+    public static function validateId($id)
     {
 
         // By default, only allow numeric ids greater than 0

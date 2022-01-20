@@ -3,7 +3,6 @@
 namespace Aic\Hub\Foundation;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Closure;
@@ -36,14 +35,13 @@ abstract class AbstractController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  mixed $id
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
     {
 
-        return $this->select( $request, function( $id ) {
+        return $this->select($request, function ($id) {
 
             return $this->find($id);
 
@@ -55,15 +53,14 @@ abstract class AbstractController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
 
-        return $this->collect( $request, function( $limit ) {
+        return $this->collect($request, function ($limit) {
 
-            return $this->paginate( $limit );
+            return $this->paginate($limit);
 
         });
 
@@ -73,18 +70,17 @@ abstract class AbstractController extends BaseController
     /**
      * Display the specified resource, but use the route name as a scope on the model.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  mixed $id
      * @return \Illuminate\Http\Response
      */
-    protected function showScope( Request $request, $id )
+    protected function showScope(Request $request, $id)
     {
 
-        $scope = $this->getScope( $request, -2 );
+        $scope = $this->getScope($request, -2);
 
-        return $this->select( $request, function( $id ) use ( $scope ) {
+        return $this->select($request, function ($id) use ($scope) {
 
-            return $this->getBaseQuery()->$scope()->find($id);
+            return $this->getBaseQuery()->{$scope}()->find($id);
 
         });
 
@@ -94,17 +90,16 @@ abstract class AbstractController extends BaseController
     /**
      * Display a listing of the resource, but use the route name as a scope on the model.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    protected function indexScope( Request $request )
+    protected function indexScope(Request $request)
     {
 
-        $scope = $this->getScope( $request, -1 );
+        $scope = $this->getScope($request, -1);
 
-        return $this->collect( $request, function( $limit ) use ( $scope ) {
+        return $this->collect($request, function ($limit) use ($scope) {
 
-            return $this->getBaseQuery()->$scope()->paginate($limit);
+            return $this->getBaseQuery()->{$scope}()->paginate($limit);
 
         });
 
@@ -115,22 +110,21 @@ abstract class AbstractController extends BaseController
      * Extract name of scope method from request string.
      * Ensures that the method is a valid local scope.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  integer $offset  Index of the Request URI segment to extract
      * @return string
      */
-    protected function getScope( Request $request, $offset )
+    protected function getScope(Request $request, $offset)
     {
 
-        $param = array_slice( $request->segments(), $offset, 1 )[0];
-        $param = str_replace( ' ', '', ucwords( str_replace( '-', ' ', $param ) ) );
+        $param = array_slice($request->segments(), $offset, 1)[0];
+        $param = str_replace(' ', '', ucwords(str_replace('-', ' ', $param)));
 
-        $scope = lcfirst( $param );
+        $scope = lcfirst($param);
         $method = 'scope' . $scope;
 
-        if( !method_exists( $this->model, $method ) )
+        if(!method_exists($this->model, $method))
         {
-            throw new \BadFunctionCallException( 'Class ' . $this->model . ' has no scope named `' . $scope . '`' );
+            throw new \BadFunctionCallException('Class ' . $this->model . ' has no scope named `' . $scope . '`');
         }
 
         return $scope;
@@ -183,23 +177,21 @@ abstract class AbstractController extends BaseController
      * Return a single resource. Not meant to be called directly in routes.
      * `$callback` should return an Eloquent Model.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $callback
      * @return \Illuminate\Http\Response
      */
-    protected function select( Request $request, Closure $callback )
+    protected function select(Request $request, Closure $callback)
     {
 
-        $this->validateMethod( $request );
+        $this->validateMethod($request);
 
         $id = $request->route('id');
 
-        if (!$this->validateId( $id ))
+        if (!$this->validateId($id))
         {
             throw new InvalidSyntaxException();
         }
 
-        $item = $callback( $id );
+        $item = $callback($id);
 
         if (!$item)
         {
@@ -208,7 +200,7 @@ abstract class AbstractController extends BaseController
 
         $fields = RequestFacade::input('fields');
 
-        return response()->item($item, new $this->transformer($fields) );
+        return response()->item($item, new $this->transformer($fields));
 
     }
 
@@ -217,14 +209,12 @@ abstract class AbstractController extends BaseController
      * Return a list of resources. Not meant to be called directly in routes.
      * `$callback` should return an Eloquent Collection.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $callback
      * @return \Illuminate\Http\Response
      */
-    protected function collect( Request $request, Closure $callback )
+    protected function collect(Request $request, Closure $callback)
     {
 
-        $this->validateMethod( $request );
+        $this->validateMethod($request);
 
         // Process ?ids= query param
         $ids = $request->input('ids');
@@ -246,11 +236,11 @@ abstract class AbstractController extends BaseController
         $id = $request->route('id');
 
         // Assumes the inheriting class set model and transformer
-        $all = $callback( $limit, $id );
+        $all = $callback($limit, $id);
 
         $fields = RequestFacade::input('fields');
 
-        return response()->collection($all, new $this->transformer($fields) );
+        return response()->collection($all, new $this->transformer($fields));
 
     }
 
@@ -273,10 +263,10 @@ abstract class AbstractController extends BaseController
         }
 
         // Validate the syntax for each $id
-        foreach( $ids as $id )
+        foreach($ids as $id)
         {
 
-            if (!$this->validateId( $id ))
+            if (!$this->validateId($id))
             {
                 throw new InvalidSyntaxException();
             }
@@ -287,7 +277,7 @@ abstract class AbstractController extends BaseController
 
         $fields = RequestFacade::input('fields');
 
-        return response()->collection($all, new $this->transformer($fields) );
+        return response()->collection($all, new $this->transformer($fields));
 
     }
 
@@ -298,7 +288,7 @@ abstract class AbstractController extends BaseController
      * @param mixed $id
      * @return boolean
      */
-    protected function validateId( $id )
+    protected function validateId($id)
     {
 
         // Only execute this validation if the model has defined a `validateId` method
@@ -306,6 +296,7 @@ abstract class AbstractController extends BaseController
         {
             return $this->model::validateId($id);
         }
+
         return true;
 
     }
@@ -314,15 +305,14 @@ abstract class AbstractController extends BaseController
     /**
      * Throw an exception if the HTTP method is invalid.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return boolean
      */
-    protected function validateMethod( Request $request )
+    protected function validateMethod(Request $request)
     {
 
         // Technically this will never be called if we only route GET and POST
         // To respond to all HTTP verbs, call `Route.any`
-        if( !in_array($request->method(), ['GET', 'POST']) )
+        if(!in_array($request->method(), ['GET', 'POST']))
         {
             throw new MethodNotAllowedException();
         }

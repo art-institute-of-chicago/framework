@@ -13,14 +13,14 @@ class DefaultConfigServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    private $defaultConfigPath = __DIR__.'/../config/default';
+    private $defaultConfigPath = __DIR__ . '/../config/default';
 
     /**
      * Path to directory where published config files are stored.
      *
      * @var string
      */
-    private $publishConfigPath = __DIR__.'/../config/publish';
+    private $publishConfigPath = __DIR__ . '/../config/publish';
 
     /**
      * This publishes the required `config/app.php` file to your app, which
@@ -63,13 +63,13 @@ class DefaultConfigServiceProvider extends ServiceProvider
     public function register()
     {
 
-        $files = glob( $this->defaultConfigPath . '/*.php' );
+        $files = glob($this->defaultConfigPath . '/*.php');
 
-        foreach( $files as $file )
+        foreach($files as $file)
         {
 
             // https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
-            $this->mergeConfigFrom( $file, basename( $file, '.php' ) );
+            $this->mergeConfigFrom($file, basename($file, '.php'));
 
         }
 

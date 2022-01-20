@@ -7,9 +7,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 abstract class AbstractException extends HttpException
 {
 
-    protected $message = null;
+    protected $message;
 
-    protected $detail = null;
+    protected $detail;
 
     protected $code = 500;
 

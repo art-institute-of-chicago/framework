@@ -30,13 +30,14 @@ class ResourceServiceProvider extends ServiceProvider
         \Illuminate\Pagination\AbstractPaginator::currentPathResolver(function () {
             /** @var \Illuminate\Routing\UrlGenerator $url */
            $url = app('url');
+
            return $url->current();
         });
 
         // Provide methods for API transformers
         $fractal = $this->app->make('League\Fractal\Manager');
 
-        $fractal->setSerializer( new ResourceSerializer );
+        $fractal->setSerializer(new ResourceSerializer());
 
         // Parse fractal includes and excludes
         $this->parseFractalParam($fractal, 'include', 'parseIncludes');
@@ -68,7 +69,7 @@ class ResourceServiceProvider extends ServiceProvider
                 $paginator = [
                     'total' => $collection->total(),
                     'limit' => (int) $collection->perPage(),
-                    'offset' => (int) $collection->perPage() * ( $collection->currentPage() - 1 ),
+                    'offset' => (int) $collection->perPage() * ($collection->currentPage() - 1),
                     'total_pages' => $collection->lastPage(),
                     'current_page' => $collection->currentPage(),
                 ];
@@ -143,29 +144,29 @@ class ResourceServiceProvider extends ServiceProvider
      * @param string $param  Name of query string param to parse
      * @param string $method  Either `parseIncludes` or `parseExcludes`
      */
-    private function parseFractalParam( $fractal, $param, $method )
+    private function parseFractalParam($fractal, $param, $method)
     {
 
-        $values = Request::input( $param );
+        $values = Request::input($param);
 
-        if( !isset( $values ) )
+        if(!isset($values))
         {
             return;
         }
 
         // Fractal handles this internally, but we do it early for preprocessing
-        if( is_string( $values ) )
+        if(is_string($values))
         {
             $values = explode(',', $values);
         }
 
         // Allows for camel, snake, and kebab cases
-        foreach( $values as &$value )
+        foreach($values as &$value)
         {
-            $value = Str::snake( Str::camel( $value ) );
+            $value = Str::snake(Str::camel($value));
         }
 
-        $fractal->$method( $values );
+        $fractal->{$method}($values);
 
     }
 

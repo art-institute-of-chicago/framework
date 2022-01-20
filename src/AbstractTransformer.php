@@ -24,10 +24,10 @@ abstract class AbstractTransformer extends TransformerAbstract
      * Be sure to call parent::__construct() if you overwrite this.
      * Otherwise, you will lose field-filtering functionality.
      */
-    public function __construct( $fields = null )
+    public function __construct($fields = null)
     {
 
-        $this->fields = $this->getFields( $fields );
+        $this->fields = $this->getFields($fields);
 
     }
 
@@ -37,18 +37,18 @@ abstract class AbstractTransformer extends TransformerAbstract
      *
      * @var array
      */
-    private function getFields( $fields = null )
+    private function getFields($fields = null)
     {
 
-        if( !$fields ) {
+        if(!$fields) {
             return null;
         }
 
-        if( is_array( $fields ) ) {
+        if(is_array($fields)) {
             return $fields;
         }
 
-        if( is_string( $fields ) ) {
+        if(is_string($fields)) {
             return explode(',', $fields);
         }
 
@@ -65,20 +65,20 @@ abstract class AbstractTransformer extends TransformerAbstract
      * @param  mixed  $input
      * @return array
      */
-    public function transform( $input )
+    public function transform($input)
     {
 
-        if( $input instanceof Model )
+        if($input instanceof Model)
         {
             $input = $input->toArray();
         }
 
-        if( !is_array( $input ) )
+        if(!is_array($input))
         {
-            throw \InvalidArgumentException( 'Transformer expects array or model.' );
+            throw \InvalidArgumentException('Transformer expects array or model.');
         }
 
-        return $this->filterFields( $input );
+        return $this->filterFields($input);
 
     }
 
@@ -88,19 +88,19 @@ abstract class AbstractTransformer extends TransformerAbstract
      * @param  mixed  $data
      * @return array
      */
-    protected function filterFields( $data )
+    protected function filterFields($data)
     {
 
-        if( is_null($this->fields) ) {
+        if(is_null($this->fields)) {
             return $data;
         }
 
         // Unset default includes not present in fields param
         // https://github.com/thephpleague/fractal/issues/143
-        $this->setDefaultIncludes( array_intersect($this->defaultIncludes, $this->fields) );
+        $this->setDefaultIncludes(array_intersect($this->defaultIncludes, $this->fields));
 
         // Filter $data to only provide keys specified in fields param
-        return array_intersect_key( $data, array_flip((array) $this->fields) );
+        return array_intersect_key($data, array_flip((array) $this->fields));
 
     }
 

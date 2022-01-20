@@ -2,8 +2,6 @@
 
 namespace Aic\Hub\Foundation\Providers;
 
-use Aic\Hub\Foundation\Library\Database\MySqlConnection;
-use Illuminate\Database\Connection;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -18,6 +16,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
     }
 }
