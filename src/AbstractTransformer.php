@@ -8,7 +8,6 @@ use League\Fractal\TransformerAbstract;
 
 abstract class AbstractTransformer extends TransformerAbstract
 {
-
     /**
      * Used for only returning a subset of fields.
      * Expects a comma-separated string or an array.
@@ -25,9 +24,7 @@ abstract class AbstractTransformer extends TransformerAbstract
      */
     public function __construct($fields = null)
     {
-
         $this->fields = $this->getFields($fields);
-
     }
 
     /**
@@ -38,7 +35,6 @@ abstract class AbstractTransformer extends TransformerAbstract
      */
     private function getFields($fields = null)
     {
-
         if (!$fields) {
             return null;
         }
@@ -52,7 +48,6 @@ abstract class AbstractTransformer extends TransformerAbstract
         }
 
         return null;
-
     }
 
     /**
@@ -66,19 +61,15 @@ abstract class AbstractTransformer extends TransformerAbstract
      */
     public function transform($input)
     {
-
-        if ($input instanceof Model)
-        {
+        if ($input instanceof Model) {
             $input = $input->toArray();
         }
 
-        if (!is_array($input))
-        {
+        if (!is_array($input)) {
             throw \InvalidArgumentException('Transformer expects array or model.');
         }
 
         return $this->filterFields($input);
-
     }
 
     /**
@@ -89,7 +80,6 @@ abstract class AbstractTransformer extends TransformerAbstract
      */
     protected function filterFields($data)
     {
-
         if (is_null($this->fields)) {
             return $data;
         }
@@ -100,7 +90,5 @@ abstract class AbstractTransformer extends TransformerAbstract
 
         // Filter $data to only provide keys specified in fields param
         return array_intersect_key($data, array_flip((array) $this->fields));
-
     }
-
 }

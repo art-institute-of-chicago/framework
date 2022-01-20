@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class DefaultConfigServiceProvider extends ServiceProvider
 {
-
     /**
      * Path to directory where default config files are stored.
      * They will be merged with any provided by the application.
@@ -36,11 +35,9 @@ class DefaultConfigServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->publishes([
             $this->publishConfigPath . '/app.php' => config_path('app.php'),
         ]);
-
     }
 
     /**
@@ -57,25 +54,19 @@ class DefaultConfigServiceProvider extends ServiceProvider
      * `boot` method here for more info.
      *
      * @link https://laravel.com/docs/5.5/packages#resources
+     * @link https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
      *
      * @return void
      */
     public function register()
     {
-
         $files = glob($this->defaultConfigPath . '/*.php');
 
-        foreach ($files as $file)
-        {
-
-            // https://laracasts.com/discuss/channels/general-discussion/how-does-mergeconfigfrom-work
+        foreach ($files as $file) {
             $this->mergeConfigFrom($file, basename($file, '.php'));
-
         }
 
         // Uncomment this for debugging
         // dd( $this->app['config'] );
-
     }
-
 }

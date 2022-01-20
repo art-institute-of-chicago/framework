@@ -9,7 +9,6 @@ use Aic\Hub\Foundation\AbstractCommand as BaseCommand;
 
 class MakeUser extends BaseCommand
 {
-
     protected $signature = 'make:user
                             {username : Username for the user, for admin use only}
                             {--token= : Provide a token instead of generating it}
@@ -19,7 +18,6 @@ class MakeUser extends BaseCommand
 
     public function handle()
     {
-
         $username = $this->argument('username');
         $user = User::where('username', '=', $username)->first();
 
@@ -46,7 +44,5 @@ class MakeUser extends BaseCommand
         $this->info($successPrefix . ' Their API token is as follows:');
         $this->warn($token);
         $this->info('Do not lose this token! It cannot be recovered.');
-
     }
-
 }

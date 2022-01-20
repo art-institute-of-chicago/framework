@@ -9,7 +9,6 @@ use Aic\Hub\Foundation\AbstractCommand as BaseCommand;
 
 class DatabaseReset extends BaseCommand
 {
-
     protected $signature = 'db:reset
                             {--force : Delete without confirmation}
                             {--connection= : Delete without confirmation}';
@@ -26,22 +25,15 @@ class DatabaseReset extends BaseCommand
 
         $this->db = DB::connection($this->connection);
 
-        if ($this->confirmReset())
-        {
-
+        if ($this->confirmReset()) {
             $this->dropTables();
-
         } else {
-
             $this->info('Database reset command aborted. Whew!');
-
         }
-
     }
 
     private function confirmReset()
     {
-
         return $this->option('force') || ((
             $this->confirm('Are you sure you want to drop all tables in `' . env('DB_DATABASE') . '`? [y|N]')
         ) && (
@@ -51,12 +43,10 @@ class DatabaseReset extends BaseCommand
         ) && (
             !empty($this->db->getTablePrefix()) || $this->confirm('Your table prefix is empty. All prefixed tables will be dropped. Continue? [y|N]')
         ));
-
     }
 
     private function dropTables()
     {
-
         // In case we get interrupted midway
         $this->db->statement('SET FOREIGN_KEY_CHECKS=0;');
 
@@ -66,22 +56,18 @@ class DatabaseReset extends BaseCommand
         // For trimming and ignoring
         $table_prefix = $this->db->getTablePrefix();
 
-        foreach ($tables as $table)
-        {
-
+        foreach ($tables as $table) {
             $table_array = get_object_vars($table);
             $table_name = $table_array[key($table_array)];
 
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
-            if (!empty($table_prefix) && !starts_with($table_name, $table_prefix))
-            {
+            if (!empty($table_prefix) && !starts_with($table_name, $table_prefix)) {
                 $this->line('<fg=blue>Skipping ' . $table_name . '</>');
 
                 continue;
             }
 
-            switch ($table_array['Table_type'])
-            {
+            switch ($table_array['Table_type']) {
                 case 'VIEW':
                     $this->warn('Dropping view ' . $table_name);
                     $this->db->statement('DROP VIEW `' . $table_name . '`;');
@@ -94,11 +80,8 @@ class DatabaseReset extends BaseCommand
 
                 break;
             }
-
         }
 
         $this->db->statement('SET FOREIGN_KEY_CHECKS=1;');
-
     }
-
 }

@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 
 abstract class AbstractCommand extends Command
 {
-
     /**
      * Execute the console command.
      *
@@ -28,7 +27,6 @@ abstract class AbstractCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $start = microtime(TRUE);
 
         // Call Illuminate\Console\Command::execute
@@ -39,7 +37,5 @@ abstract class AbstractCommand extends Command
         $this->warn("Execution Time: {$totaltime} sec");
 
         return $result;
-
     }
-
 }

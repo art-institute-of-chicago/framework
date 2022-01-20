@@ -6,7 +6,6 @@ use Closure;
 
 class ForceAcceptJson
 {
-
     /**
      * Make `wantsJson` return true. Our API should always return JSON.
      * Symphony's `HeaderBag` forces header names to lowercase.
@@ -20,5 +19,4 @@ class ForceAcceptJson
 
         return $next($request);
     }
-
 }

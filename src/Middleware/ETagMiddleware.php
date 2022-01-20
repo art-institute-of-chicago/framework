@@ -6,7 +6,6 @@ use Closure;
 
 class ETagMiddleware
 {
-
     /**
      * Implement Etag support
      *
@@ -15,7 +14,6 @@ class ETagMiddleware
      */
     public function handle($request, Closure $next)
     {
-
         // Get response
         $response = $next($request);
 
@@ -33,12 +31,9 @@ class ETagMiddleware
 
             // Set Etag
             $response->setEtag($etag);
-
         }
 
         // Send response
         return $response;
-
     }
-
 }

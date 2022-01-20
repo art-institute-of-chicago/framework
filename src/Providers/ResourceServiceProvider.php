@@ -17,7 +17,6 @@ use Illuminate\Support\Str;
 
 class ResourceServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *
@@ -25,13 +24,12 @@ class ResourceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         // Provide correct next and previous URL domains
         \Illuminate\Pagination\AbstractPaginator::currentPathResolver(function () {
             /** @var \Illuminate\Routing\UrlGenerator $url */
-           $url = app('url');
+            $url = app('url');
 
-           return $url->current();
+            return $url->current();
         });
 
         // Provide methods for API transformers
@@ -45,7 +43,6 @@ class ResourceServiceProvider extends ServiceProvider
 
         // Define a response macro to output a single resource
         response()->macro('item', function ($item, TransformerAbstract $transformer, $status = 200, array $headers = []) use ($fractal) {
-
             $resource = new Item($item, $transformer);
 
             return response()->json(
@@ -53,19 +50,15 @@ class ResourceServiceProvider extends ServiceProvider
                 $status,
                 $headers
             );
-
         });
 
         // Define a response macro to output multiple resources
         response()->macro('collection', function ($collection, TransformerAbstract $transformer, $status = 200, array $headers = []) use ($fractal) {
-
             $resource = new Collection($collection, $transformer);
 
             $data = $fractal->createData($resource)->toArray();
 
-            if ($collection instanceof LengthAwarePaginator)
-            {
-
+            if ($collection instanceof LengthAwarePaginator) {
                 $paginator = [
                     'total' => $collection->total(),
                     'limit' => (int) $collection->perPage(),
@@ -89,13 +82,11 @@ class ResourceServiceProvider extends ServiceProvider
                     'version' => config('aic.version')
                 ];
 
-                if (config('aic.documentation_url'))
-                {
+                if (config('aic.documentation_url')) {
                     $info['documentation'] = config('aic.documentation_url');
                 }
 
-                if (config('aic.message'))
-                {
+                if (config('aic.message')) {
                     $info['message'] = config('aic.message');
                 }
 
@@ -104,13 +95,9 @@ class ResourceServiceProvider extends ServiceProvider
                 // Config
                 $config = config('aic.config_documentation');
 
-                if ($config)
-                {
-
+                if ($config) {
                     $data = array_merge($data, ['config' => $config]);
-
                 }
-
             }
 
             return response()->json(
@@ -118,12 +105,10 @@ class ResourceServiceProvider extends ServiceProvider
                 $status,
                 $headers
             );
-
         });
 
         // MySQL compatibility
         Schema::defaultStringLength(191);
-
     }
 
     /**
@@ -133,7 +118,6 @@ class ResourceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 
     /**
@@ -147,28 +131,22 @@ class ResourceServiceProvider extends ServiceProvider
      */
     private function parseFractalParam($fractal, $param, $method)
     {
-
         $values = Request::input($param);
 
-        if (!isset($values))
-        {
+        if (!isset($values)) {
             return;
         }
 
         // Fractal handles this internally, but we do it early for preprocessing
-        if (is_string($values))
-        {
+        if (is_string($values)) {
             $values = explode(',', $values);
         }
 
         // Allows for camel, snake, and kebab cases
-        foreach ($values as &$value)
-        {
+        foreach ($values as &$value) {
             $value = Str::snake(Str::camel($value));
         }
 
         $fractal->{$method}($values);
-
     }
-
 }

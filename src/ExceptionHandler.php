@@ -11,7 +11,6 @@ use Illuminate\Foundation\Exceptions\Handler;
 
 class ExceptionHandler extends Handler
 {
-
     /**
      * A list of the exception types that should not be reported.
      *
@@ -38,7 +37,6 @@ class ExceptionHandler extends Handler
         }
 
         parent::report($exception);
-
     }
 
     /**
@@ -55,8 +53,7 @@ class ExceptionHandler extends Handler
 
         // Laravel's backtrace page is too readable to forgo
         // Show it for undetailed exceptions on dev env
-        if (config('app.debug') && !$is_detailed)
-        {
+        if (config('app.debug') && !$is_detailed) {
             return parent::render($request, $e);
         }
 
@@ -71,15 +68,13 @@ class ExceptionHandler extends Handler
         ];
 
         // For our custom exceptions, output the messages
-        if ($is_detailed)
-        {
+        if ($is_detailed) {
             $response['error'] = $e->getMessage();
             $response['detail'] = $e->getDetail();
         }
 
         // Return a JSON response with the response array and status code
         return response()->json($response, $status);
-
     }
 
     /**
