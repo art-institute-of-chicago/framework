@@ -25,7 +25,9 @@ return [
 
     'providers' => [
 
-        // Laravel Framework Service Providers...
+        /*
+         * Laravel Framework Service Providers...
+         */
         Illuminate\Auth\AuthServiceProvider::class,
         // Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         // Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -49,7 +51,9 @@ return [
         // Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        // Foundation Service Providers...
+        /*
+         * Foundation Service Providers...
+         */
         Aic\Hub\Foundation\Providers\DefaultConfigServiceProvider::class,
         Aic\Hub\Foundation\Providers\ResourceServiceProvider::class,
         Aic\Hub\Foundation\Providers\RouteServiceProvider::class,

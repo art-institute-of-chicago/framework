@@ -118,7 +118,6 @@ $config->setRules([
     'single_class_element_per_statement' => true, // There MUST NOT be more than one property or constant declared per statement.
     'single_import_per_statement' => true,  // There MUST be one use keyword per declaration.
     'single_line_after_imports' => true,    // Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.
-    'single_line_comment_style' => true,    // Single-line comments and multi-line comments with only one line of actual content should use the // syntax.
     'single_quote' => true,                 // Convert double quotes to single quotes for simple strings.
     'single_space_after_construct' => true, // Ensures a single space after language constructs.
     'standardize_not_equals' => true,       // Replace all <> with !=.
