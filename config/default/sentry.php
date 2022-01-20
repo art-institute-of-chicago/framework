@@ -4,7 +4,7 @@ return [
     // https://github.com/getsentry/sentry-laravel/issues/43
     'http_proxy' => env('SENTRY_HTTP_PROXY'),
 
-    'dsn' =>  env('SENTRY_LARAVEL_DSN', env('SENTRY_DSN')),
+    'dsn' => env('SENTRY_LARAVEL_DSN', env('SENTRY_DSN')),
 
     // capture release as git sha
     // 'release' => trim(exec('git log --pretty="%h" -n1 HEAD')),
@@ -52,7 +52,7 @@ return [
     // @see: https://docs.sentry.io/platforms/php/configuration/options/#send-default-pii
     'send_default_pii' => false,
 
-    'traces_sample_rate' => (float)(env('SENTRY_TRACES_SAMPLE_RATE', 0.0)),
+    'traces_sample_rate' => (float) (env('SENTRY_TRACES_SAMPLE_RATE', 0.0)),
 
     'controllers_base_namespace' => env('SENTRY_CONTROLLERS_BASE_NAMESPACE', 'App\\Http\\Controllers'),
 ];
