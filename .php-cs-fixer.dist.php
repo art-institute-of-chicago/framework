@@ -13,7 +13,8 @@ $finder = PhpCsFixer\Finder::create()
     ->in(getcwd());
 
 $config = new PhpCsFixer\Config();
-return $config->setRules([
+$config->setFinder($finder);
+$config->setRules([
     '@PSR1' => true,
 
     'align_multiline_comment' => [          // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
@@ -25,7 +26,16 @@ return $config->setRules([
     'binary_operator_spaces' => true,       // Binary operators should be surrounded by space as configured.
     'blank_line_after_namespace' => true,   // There MUST be one blank line after the namespace declaration.
     'blank_line_after_opening_tag' => true, // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
-    'blank_line_before_statement' => true,  // An empty line feed must precede any configured statement.
+    'blank_line_before_statement' => [      // An empty line feed must precede any configured statement.
+        'statements' => [
+            'for',
+            'foreach',
+            'if',
+            'switch',
+            'try',
+            'while',
+        ],
+    ],
     'class_definition' => [                 // Whitespace around the keywords of a class, trait or interfaces definition should be one space.
         'multi_line_extends_each_single_line' => true,
         'single_item_single_line' => true,
@@ -112,5 +122,6 @@ return $config->setRules([
     'trim_array_spaces' => true,            // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
     'unary_operator_spaces' => true,        // Unary operators should be placed adjacent to their operands.
     'whitespace_after_comma_in_array' => true, // In array declaration, there MUST be a whitespace after each comma.
-])
-->setFinder($finder);
+]);
+
+return $config;

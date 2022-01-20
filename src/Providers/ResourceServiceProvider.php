@@ -88,10 +88,12 @@ class ResourceServiceProvider extends ServiceProvider
                 $info = [
                     'version' => config('aic.version')
                 ];
+
                 if (config('aic.documentation_url'))
                 {
                     $info['documentation'] = config('aic.documentation_url');
                 }
+
                 if (config('aic.message'))
                 {
                     $info['message'] = config('aic.message');
