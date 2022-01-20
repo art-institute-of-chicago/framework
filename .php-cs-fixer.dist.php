@@ -90,6 +90,7 @@ $config->setRules([
     'no_short_bool_cast' => true,           // Short cast bool using double exclamation mark should not be used.
     'no_singleline_whitespace_before_semicolons' => true, // Single-line whitespace before closing semicolon are prohibited.
     'no_spaces_after_function_name' => true, // When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.
+    'no_spaces_around_offset' => true,      // There MUST NOT be spaces around offset braces.
     'no_spaces_inside_parenthesis' => true, // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_superfluous_elseif' => true,        // Replaces superfluous elseif with if.
     'no_superfluous_phpdoc_tags' => [       // Removes @param, @return and @var tags that don't provide any useful information.

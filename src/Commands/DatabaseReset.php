@@ -70,7 +70,7 @@ class DatabaseReset extends BaseCommand
         {
 
             $table_array = get_object_vars($table);
-            $table_name = $table_array[ key($table_array) ];
+            $table_name = $table_array[key($table_array)];
 
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
             if (!empty($table_prefix) && !starts_with($table_name, $table_prefix))
