@@ -4,7 +4,6 @@ namespace Aic\Hub\Foundation\Concerns;
 
 trait HasByLastModScope
 {
-
     /**
      * WEB-1903: For use in API by AbstractController.
      */
@@ -22,9 +21,6 @@ trait HasByLastModScope
      */
     public static function getTableName()
     {
-
         return with(new static())->getTable();
-
     }
-
 }

@@ -13,7 +13,8 @@ $finder = PhpCsFixer\Finder::create()
     ->in(getcwd());
 
 $config = new PhpCsFixer\Config();
-return $config->setRules([
+$config->setFinder($finder);
+$config->setRules([
     '@PSR1' => true,
 
     'align_multiline_comment' => [          // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
@@ -25,7 +26,17 @@ return $config->setRules([
     'binary_operator_spaces' => true,       // Binary operators should be surrounded by space as configured.
     'blank_line_after_namespace' => true,   // There MUST be one blank line after the namespace declaration.
     'blank_line_after_opening_tag' => true, // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
-    'blank_line_before_statement' => true,  // An empty line feed must precede any configured statement.
+    'blank_line_before_statement' => [      // An empty line feed must precede any configured statement.
+        'statements' => [
+            'for',
+            'foreach',
+            'if',
+            'switch',
+            'try',
+            'while',
+        ],
+    ],
+    'cast_spaces' => true,                  // A single space should be between cast and variable.
     'class_definition' => [                 // Whitespace around the keywords of a class, trait or interfaces definition should be one space.
         'multi_line_extends_each_single_line' => true,
         'single_item_single_line' => true,
@@ -70,6 +81,7 @@ return $config->setRules([
     'no_empty_comment' => true,             // There should not be any empty comments.
     'no_empty_phpdoc' => true,              // There should not be empty PHPDoc blocks.
     'no_empty_statement' => true,           // Remove useless (semicolon) statements.
+    'no_extra_blank_lines' => true,         // Removes extra blank lines and/or blank lines following configuration.
     'no_leading_import_slash' => true,      // Remove leading slashes in use clauses.
     'no_leading_namespace_whitespace' => true, // The namespace declaration line shouldn't contain leading whitespace.
     'no_mixed_echo_print' => true,          // Either language construct print or echo should be used.
@@ -78,6 +90,7 @@ return $config->setRules([
     'no_short_bool_cast' => true,           // Short cast bool using double exclamation mark should not be used.
     'no_singleline_whitespace_before_semicolons' => true, // Single-line whitespace before closing semicolon are prohibited.
     'no_spaces_after_function_name' => true, // When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.
+    'no_spaces_around_offset' => true,      // There MUST NOT be spaces around offset braces.
     'no_spaces_inside_parenthesis' => true, // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_superfluous_elseif' => true,        // Replaces superfluous elseif with if.
     'no_superfluous_phpdoc_tags' => [       // Removes @param, @return and @var tags that don't provide any useful information.
@@ -87,11 +100,13 @@ return $config->setRules([
     'no_trailing_comma_in_singleline_array' => true, // PHP single-line arrays should not have trailing comma.
     'no_trailing_whitespace' => true,       // Remove trailing whitespace at the end of non-blank lines.
     'no_trailing_whitespace_in_comment' => true, // There MUST be no trailing spaces inside comment or PHPDoc.
+    'no_unneeded_control_parentheses' => true, // Removes unneeded parentheses around control statements.
     'no_unneeded_curly_braces' => true,     // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
     'no_unset_cast' => true,                // Variables must be set null instead of using (unset) casting.
     'no_unused_imports' => true,            // Unused use statements must be removed.
     'no_useless_else' => true,              // There should not be useless else cases.
     'no_useless_return' => true,            // There should not be an empty return statement at the end of a function.
+    'no_whitespace_before_comma_in_array' => true, // In array declaration, there MUST NOT be a whitespace before each comma.
     'no_whitespace_in_blank_line' => true,  // Remove trailing whitespace at the end of blank lines.
     'normalize_index_brace' => true,        // Array index should always be written by using square braces.
     'object_operator_without_whitespace' => true, // There should not be space before or after object operators -> and ?->.
@@ -100,10 +115,12 @@ return $config->setRules([
     'short_scalar_cast' => true,            // Cast (boolean) and (integer) should be written as (bool) and (int), (double) and (real) as (float), (binary) as (string).
     'single_blank_line_at_eof' => true,     // A PHP file without end tag must always end with a single empty line feed.
     'single_blank_line_before_namespace' => true, // There should be exactly one blank line before a namespace declaration.
+    'single_class_element_per_statement' => true, // There MUST NOT be more than one property or constant declared per statement.
     'single_import_per_statement' => true,  // There MUST be one use keyword per declaration.
     'single_line_after_imports' => true,    // Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.
     'single_line_comment_style' => true,    // Single-line comments and multi-line comments with only one line of actual content should use the // syntax.
     'single_quote' => true,                 // Convert double quotes to single quotes for simple strings.
+    'single_space_after_construct' => true, // Ensures a single space after language constructs.
     'standardize_not_equals' => true,       // Replace all <> with !=.
     'switch_case_semicolon_to_colon' => true, // A case should be followed by a colon and not a semicolon.
     'switch_case_space' => true,            // Removes extra spaces between colon and case value.
@@ -112,5 +129,6 @@ return $config->setRules([
     'trim_array_spaces' => true,            // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
     'unary_operator_spaces' => true,        // Unary operators should be placed adjacent to their operands.
     'whitespace_after_comma_in_array' => true, // In array declaration, there MUST be a whitespace after each comma.
-])
-->setFinder($finder);
+]);
+
+return $config;

@@ -26,5 +26,4 @@ abstract class AbstractModel extends Model
      * @var array
      */
     protected $guarded = [];
-
 }

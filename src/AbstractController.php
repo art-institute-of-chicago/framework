@@ -17,11 +17,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 abstract class AbstractController extends BaseController
 {
-
     protected $model;
 
     protected $transformer;
-
 
     /**
      * A maximum of this many items will be shown per page before erroring.
@@ -31,7 +29,6 @@ abstract class AbstractController extends BaseController
      */
     const LIMIT_MAX = 1000;
 
-
     /**
      * Display the specified resource.
      *
@@ -40,15 +37,10 @@ abstract class AbstractController extends BaseController
      */
     public function show(Request $request, $id)
     {
-
         return $this->select($request, function ($id) {
-
             return $this->find($id);
-
         });
-
     }
-
 
     /**
      * Display a listing of the resource.
@@ -57,15 +49,10 @@ abstract class AbstractController extends BaseController
      */
     public function index(Request $request)
     {
-
         return $this->collect($request, function ($limit) {
-
             return $this->paginate($limit);
-
         });
-
     }
-
 
     /**
      * Display the specified resource, but use the route name as a scope on the model.
@@ -75,17 +62,12 @@ abstract class AbstractController extends BaseController
      */
     protected function showScope(Request $request, $id)
     {
-
         $scope = $this->getScope($request, -2);
 
         return $this->select($request, function ($id) use ($scope) {
-
             return $this->getBaseQuery()->{$scope}()->find($id);
-
         });
-
     }
-
 
     /**
      * Display a listing of the resource, but use the route name as a scope on the model.
@@ -94,17 +76,12 @@ abstract class AbstractController extends BaseController
      */
     protected function indexScope(Request $request)
     {
-
         $scope = $this->getScope($request, -1);
 
         return $this->collect($request, function ($limit) use ($scope) {
-
             return $this->getBaseQuery()->{$scope}()->paginate($limit);
-
         });
-
     }
-
 
     /**
      * Extract name of scope method from request string.
@@ -115,22 +92,18 @@ abstract class AbstractController extends BaseController
      */
     protected function getScope(Request $request, $offset)
     {
-
         $param = array_slice($request->segments(), $offset, 1)[0];
         $param = str_replace(' ', '', ucwords(str_replace('-', ' ', $param)));
 
         $scope = lcfirst($param);
         $method = 'scope' . $scope;
 
-        if(!method_exists($this->model, $method))
-        {
+        if (!method_exists($this->model, $method)) {
             throw new \BadFunctionCallException('Class ' . $this->model . ' has no scope named `' . $scope . '`');
         }
 
         return $scope;
-
     }
-
 
     /**
      * Call to find specific id(s). Override this method when logic to get
@@ -141,11 +114,8 @@ abstract class AbstractController extends BaseController
      */
     protected function find($ids)
     {
-
         return $this->getBaseQuery()->find($ids);
-
     }
-
 
     /**
      * Call to get a model list. Override this method when logic to get
@@ -156,22 +126,16 @@ abstract class AbstractController extends BaseController
      */
     protected function paginate($limit)
     {
-
         return $this->getBaseQuery()->paginate($limit);
-
     }
-
 
     /**
      * WEB-1903: Helper to ensure that all items are sorted in reverse chronological order.
      */
     protected function getBaseQuery()
     {
-
         return ($this->model)::byLastMod();
-
     }
-
 
     /**
      * Return a single resource. Not meant to be called directly in routes.
@@ -181,29 +145,24 @@ abstract class AbstractController extends BaseController
      */
     protected function select(Request $request, Closure $callback)
     {
-
         $this->validateMethod($request);
 
         $id = $request->route('id');
 
-        if (!$this->validateId($id))
-        {
+        if (!$this->validateId($id)) {
             throw new InvalidSyntaxException();
         }
 
         $item = $callback($id);
 
-        if (!$item)
-        {
+        if (!$item) {
             throw new ItemNotFoundException();
         }
 
         $fields = RequestFacade::input('fields');
 
         return response()->item($item, new $this->transformer($fields));
-
     }
-
 
     /**
      * Return a list of resources. Not meant to be called directly in routes.
@@ -213,22 +172,19 @@ abstract class AbstractController extends BaseController
      */
     protected function collect(Request $request, Closure $callback)
     {
-
         $this->validateMethod($request);
 
         // Process ?ids= query param
         $ids = $request->input('ids');
 
-        if ($ids)
-        {
+        if ($ids) {
             return $this->showMutliple($ids);
         }
 
         // Check if the ?limit= is too big
         $limit = $request->input('limit') ?: 12;
 
-        if ($limit > static::LIMIT_MAX)
-        {
+        if ($limit > static::LIMIT_MAX) {
             throw new BigLimitException();
         }
 
@@ -241,9 +197,7 @@ abstract class AbstractController extends BaseController
         $fields = RequestFacade::input('fields');
 
         return response()->collection($all, new $this->transformer($fields));
-
     }
-
 
     /**
      * Display multiple resources.
@@ -253,24 +207,18 @@ abstract class AbstractController extends BaseController
      */
     protected function showMutliple($ids = '')
     {
-
         // TODO: Accept an array, not just comma-separated string
         $ids = explode(',', $ids);
 
-        if (count($ids) > static::LIMIT_MAX)
-        {
+        if (count($ids) > static::LIMIT_MAX) {
             throw new TooManyIdsException();
         }
 
         // Validate the syntax for each $id
-        foreach($ids as $id)
-        {
-
-            if (!$this->validateId($id))
-            {
+        foreach ($ids as $id) {
+            if (!$this->validateId($id)) {
                 throw new InvalidSyntaxException();
             }
-
         }
 
         $all = $this->find($ids);
@@ -278,9 +226,7 @@ abstract class AbstractController extends BaseController
         $fields = RequestFacade::input('fields');
 
         return response()->collection($all, new $this->transformer($fields));
-
     }
-
 
     /**
      * Validate `id` route or query string param format.
@@ -290,17 +236,13 @@ abstract class AbstractController extends BaseController
      */
     protected function validateId($id)
     {
-
         // Only execute this validation if the model has defined a `validateId` method
-        if (method_exists($this->model, 'validateId'))
-        {
+        if (method_exists($this->model, 'validateId')) {
             return $this->model::validateId($id);
         }
 
         return true;
-
     }
-
 
     /**
      * Throw an exception if the HTTP method is invalid.
@@ -309,38 +251,30 @@ abstract class AbstractController extends BaseController
      */
     protected function validateMethod(Request $request)
     {
-
         // Technically this will never be called if we only route GET and POST
         // To respond to all HTTP verbs, call `Route.any`
-        if(!in_array($request->method(), ['GET', 'POST']))
-        {
+        if (!in_array($request->method(), ['GET', 'POST'])) {
             throw new MethodNotAllowedException();
         }
-
     }
-
 
     /**
      * Utility getter for transformer assoc. w/ this controller.
      *
      * @return \League\Fractal\TransformerAbstract
      */
-    public function transformer() {
-
+    public function transformer()
+    {
         return $this->transformer;
-
     }
-
 
     /**
      * Utility getter for model assoc. w/ this controller.
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function model() {
-
+    public function model()
+    {
         return $this->model;
-
     }
-
 }

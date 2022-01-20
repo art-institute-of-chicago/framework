@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 abstract class AbstractException extends HttpException
 {
-
     protected $message;
 
     protected $detail;
@@ -27,5 +26,4 @@ abstract class AbstractException extends HttpException
     {
         return $this->detail;
     }
-
 }

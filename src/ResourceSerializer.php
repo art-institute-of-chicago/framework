@@ -6,7 +6,6 @@ use League\Fractal\Serializer\DataArraySerializer;
 
 class ResourceSerializer extends DataArraySerializer
 {
-
    /**
     * Serialize a collection.
     *
@@ -16,13 +15,11 @@ class ResourceSerializer extends DataArraySerializer
     */
     public function collection($resourceKey, array $data)
     {
-
         if ($resourceKey === false) {
             return $data;
         }
 
         return [$resourceKey ?: 'data' => $data];
-
     }
 
     /**
@@ -34,13 +31,10 @@ class ResourceSerializer extends DataArraySerializer
      */
     public function item($resourceKey, array $data)
     {
-
         if ($resourceKey === false) {
             return $data;
         }
 
         return [$resourceKey ?: 'data' => $data];
-
     }
-
 }

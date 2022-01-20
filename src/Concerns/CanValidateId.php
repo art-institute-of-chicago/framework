@@ -4,7 +4,6 @@ namespace Aic\Hub\Foundation\Concerns;
 
 trait CanValidateId
 {
-
     /**
      * Validate an id. Useful for validating routes or query string params.
      *
@@ -16,10 +15,7 @@ trait CanValidateId
      */
     public static function validateId($id)
     {
-
         // By default, only allow numeric ids greater than 0
         return is_numeric($id) && intval($id) > 0;
-
     }
-
 }
