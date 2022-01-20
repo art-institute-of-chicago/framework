@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements AuthorizableContract
 {
-    use Authorizable, HasApiTokens;
+    use Authorizable;
+    use HasApiTokens;
 
     protected $connection = 'userdata';
 

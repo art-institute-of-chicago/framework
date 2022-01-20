@@ -63,7 +63,6 @@ class DatabaseReset extends BaseCommand
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
             if (!empty($table_prefix) && !starts_with($table_name, $table_prefix)) {
                 $this->line('<fg=blue>Skipping ' . $table_name . '</>');
-
                 continue;
             }
 
@@ -71,13 +70,12 @@ class DatabaseReset extends BaseCommand
                 case 'VIEW':
                     $this->warn('Dropping view ' . $table_name);
                     $this->db->statement('DROP VIEW `' . $table_name . '`;');
-
                 break;
+
                 default:
                     $this->info('Dropping table ' . $table_name);
                     $table_name = substr($table_name, strlen($table_prefix));
                     Schema::connection($this->connection)->drop($table_name);
-
                 break;
             }
         }

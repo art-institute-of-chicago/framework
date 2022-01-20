@@ -36,7 +36,7 @@ abstract class AbstractTransformer extends TransformerAbstract
     private function getFields($fields = null)
     {
         if (!$fields) {
-            return null;
+            return;
         }
 
         if (is_array($fields)) {
@@ -46,8 +46,6 @@ abstract class AbstractTransformer extends TransformerAbstract
         if (is_string($fields)) {
             return explode(',', $fields);
         }
-
-        return null;
     }
 
     /**
