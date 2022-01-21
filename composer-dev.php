@@ -25,9 +25,11 @@
 | Before running this command, do the following:
 |
 |    1. Clone the foundation repo to your development environment.
-|    2. Add the path to the foundation repo to e.g. your `~/.bashrc`:
+|    2. If needed, add the path to the foundation to e.g. your `~/.bashrc`:
 |
-|       AIC_PATH_TO_FOUNDATION='/home/vagrant/www/path/to/foundation'
+|       export AIC_FOUNDATION_PATH='../relative/path/to/foundation'
+|
+|       Keep this path relative, so it resolves in both Homestead and host.
 |
 | Add the following to your `.gitignore`:
 |
@@ -38,7 +40,7 @@
 |
 */
 
-$foundationPath = getenv('AIC_PATH_TO_FOUNDATION') ?: '../../foundation';
+$foundationPath = getenv('AIC_FOUNDATION_PATH') ?: '../foundation';
 
 $composerJson = json_decode(file_get_contents('composer.json'));
 
