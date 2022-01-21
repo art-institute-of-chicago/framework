@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Foundation\Concerns;
+namespace Aic\Hub\Foundation\Models\Concerns;
 
 trait HasByLastModScope
 {

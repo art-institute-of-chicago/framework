@@ -2,8 +2,8 @@
 
 namespace Aic\Hub\Foundation;
 
-use Aic\Hub\Foundation\Concerns\CanValidateId;
-use Aic\Hub\Foundation\Concerns\HasByLastModScope;
+use Aic\Hub\Foundation\Models\Concerns\CanValidateId;
+use Aic\Hub\Foundation\Models\Concerns\HasByLastModScope;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
