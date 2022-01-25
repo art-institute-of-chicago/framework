@@ -5,6 +5,7 @@ namespace Aic\Hub\Foundation;
 use Aic\Hub\Foundation\Models\Concerns\CanValidateId;
 use Aic\Hub\Foundation\Models\Concerns\HasByLastModScope;
 use Aic\Hub\Foundation\Models\Concerns\Singletonable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
@@ -12,6 +13,7 @@ abstract class AbstractModel extends Model
     use CanValidateId;
     use HasByLastModScope;
     use Singletonable;
+    use HasFactory;
 
     /**
      * Indicates if the IDs are auto-incrementing. We don't want this in most cases.
