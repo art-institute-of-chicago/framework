@@ -77,4 +77,26 @@ abstract class ApiTestCase extends BaseTestCase
 
         $response->assertStatus(404);
     }
+
+    public function test_it_shows_empty_listing_endpoint()
+    {
+        $response = $this->getJson($this->endpoint);
+
+        $response->assertStatus(200);
+        $response->assertJson(fn ($json) => $json
+            ->has('pagination', fn ($json) => $json
+                ->where('total', 0)
+                ->where('limit', 12)
+                ->where('offset', 0)
+                ->where('current_page', 1)
+                ->where('total_pages', 1)
+                ->where('prev_url', null)
+                ->where('next_url', null)
+            )
+            ->has('data', 0)
+            ->has('info', fn ($json) => $json
+                ->has('version')
+            )
+        );
+    }
 }

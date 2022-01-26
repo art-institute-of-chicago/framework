@@ -67,7 +67,9 @@ class ResourceServiceProvider extends ServiceProvider
                     'current_page' => $collection->currentPage(),
                 ];
 
-                // TODO: Account for include, fields, and other stuff?
+                // Show these links even when null
+                $paginator['prev_url'] = null;
+                $paginator['next_url'] = null;
 
                 if ($collection->previousPageUrl()) {
                     $paginator['prev_url'] = $collection->previousPageUrl() . '&limit=' . $collection->perPage();
