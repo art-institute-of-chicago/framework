@@ -59,4 +59,22 @@ abstract class ApiTestCase extends BaseTestCase
             ],
         ]);
     }
+
+    public function test_it_400s_on_detail_if_id_is_invalid()
+    {
+        $id = ($this->model)::factory()->getInvalidId();
+
+        $response = $this->getJson($this->endpoint . '/' . $id);
+
+        $response->assertStatus(400);
+    }
+
+    public function test_it_404s_on_detail_if_item_not_found()
+    {
+        $id = ($this->model)::factory()->getValidId();
+
+        $response = $this->getJson($this->endpoint . '/' . $id);
+
+        $response->assertStatus(404);
+    }
 }
