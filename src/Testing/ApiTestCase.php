@@ -83,20 +83,26 @@ abstract class ApiTestCase extends BaseTestCase
         $response = $this->getJson($this->endpoint);
 
         $response->assertStatus(200);
+
+        $response->assertJson([
+            'pagination' => [
+                'total' => 0,
+                'limit' => 12,
+                'offset' => 0,
+                'current_page' => 1,
+                'total_pages' => 1,
+                'prev_url' => null,
+                'next_url' => null,
+            ],
+        ]);
+
         $response->assertJson(fn ($json) => $json
-            ->has('pagination', fn ($json) => $json
-                ->where('total', 0)
-                ->where('limit', 12)
-                ->where('offset', 0)
-                ->where('current_page', 1)
-                ->where('total_pages', 1)
-                ->where('prev_url', null)
-                ->where('next_url', null)
-            )
             ->has('data', 0)
             ->has('info', fn ($json) => $json
                 ->has('version')
+                ->etc()
             )
+            ->etc()
         );
     }
 }
