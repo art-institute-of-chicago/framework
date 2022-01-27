@@ -45,7 +45,7 @@ abstract class ApiTestCase extends BaseTestCase
         parent::setUp();
     }
 
-    public function test_it_shows_detail_endpoint()
+    public function test_it_shows_detail()
     {
         $item = ($this->model)::factory()->create();
 
@@ -78,7 +78,7 @@ abstract class ApiTestCase extends BaseTestCase
         $response->assertStatus(404);
     }
 
-    public function test_it_shows_empty_listing_endpoint()
+    public function test_it_shows_empty_listing()
     {
         $response = $this->getJson($this->endpoint);
 
@@ -102,6 +102,37 @@ abstract class ApiTestCase extends BaseTestCase
                 ->has('version')
                 ->etc()
             )
+            ->etc()
+        );
+    }
+
+    public function test_it_shows_first_page_on_listing()
+    {
+        ($this->model)::factory()->count(7)->create();
+
+        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+            'limit' => 5,
+        ]));
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'pagination' => [
+                'total' => 7,
+                'limit' => 5,
+                'offset' => 0,
+                'current_page' => 1,
+                'total_pages' => 2,
+                'prev_url' => null,
+                'next_url' => url($this->endpoint . '?' . http_build_query([
+                    'page' => 2,
+                    'limit' => 5,
+                ])),
+            ],
+        ]);
+
+        $response->assertJson(fn ($json) => $json
+            ->has('data', 5)
             ->etc()
         );
     }
