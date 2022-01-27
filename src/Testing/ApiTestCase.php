@@ -204,4 +204,16 @@ abstract class ApiTestCase extends BaseTestCase
             ->etc()
         );
     }
+
+    /**
+     * We allow deep pagination, but keep limit reasonable.
+     */
+    public function test_it_403s_if_limit_is_too_high()
+    {
+        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+            'limit' => 1001,
+        ]));
+
+        $response->assertStatus(403);
+    }
 }
