@@ -67,7 +67,9 @@ $config->setRules([
     'lowercase_static_reference' => true,   // Class static references self, static and parent MUST be in lower case.
     'magic_constant_casing' => true,        // Magic constants should be referred to using the correct casing.
     'magic_method_casing' => true,          // Magic method definitions and calls must be using the correct casing.
-    'method_argument_space' => true,        // In method arguments and method call, there MUST NOT be a space before each comma and there MUST be one space after each comma. Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line.
+    'method_argument_space' => [            // In method arguments and method call, there MUST NOT be a space before each comma and there MUST be one space after each comma. Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MAY be on the next line, and there MAY be only one argument per line.
+        'on_multiline' => 'ignore',         // allow multi-line arrow functions
+    ],
     'method_chaining_indentation' => true,  // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
     'multiline_comment_opening_closing' => true, // DocBlocks must start with two asterisks, multiline comments must start with a single asterisk, after the opening slash. Both must end with a single asterisk before the closing slash.
     'multiline_whitespace_before_semicolons' => true, // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.

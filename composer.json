@@ -2,6 +2,29 @@
     "name": "aic/data-hub-foundation",
     "description": "Shared components for our data hub services.",
     "type": "library",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "type": "metapackage",
+                "name": "vendor/package-patches-dev",
+                "version": "1.0.0",
+                "require": {
+                    "netresearch/composer-patches-plugin": "~1.0"
+                },
+                "extra": {
+                    "patches": {
+                        "friendsofphp/php-cs-fixer": [
+                            {
+                                "title": "API-45: Fix arrow functions in method_chaining_indentation",
+                                "url": "patches/API-45---fix-arrow-functions-in-method-chaining-indentation.diff"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
     "require": {
         "php": "^7.3|^8.0",
         "laravel/framework": "*",
@@ -11,7 +34,8 @@
         "netresearch/composer-patches-plugin": "~1.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.5"
+        "friendsofphp/php-cs-fixer": "^3.5",
+        "vendor/package-patches-dev": "~1.0"
     },
     "license": "AGPL-3.0",
     "authors": [
@@ -45,6 +69,12 @@
                 {
                     "title": "API-227: Remove comments from migration stubs",
                     "url": "vendor/aic/data-hub-foundation/patches/API-227---remove-comments-from-migration-stubs.diff"
+                }
+            ],
+            "friendsofphp/php-cs-fixer": [
+                {
+                    "title": "API-45: Fix arrow functions in method_chaining_indentation",
+                    "url": "vendor/aic/data-hub-foundation/patches/API-45---fix-arrow-functions-in-method-chaining-indentation.diff"
                 }
             ]
         }
