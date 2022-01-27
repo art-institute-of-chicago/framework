@@ -108,21 +108,22 @@ abstract class ApiTestCase extends BaseTestCase
 
     public function test_it_shows_first_page_on_listing()
     {
-        ($this->model)::factory()->count(7)->create();
+        ($this->model)::factory()->count(12)->create();
 
         $response = $this->getJson($this->endpoint . '?' . http_build_query([
             'limit' => 5,
+            'page' => 1,
         ]));
 
         $response->assertStatus(200);
 
         $response->assertJson([
             'pagination' => [
-                'total' => 7,
+                'total' => 12,
                 'limit' => 5,
                 'offset' => 0,
                 'current_page' => 1,
-                'total_pages' => 2,
+                'total_pages' => 3,
                 'prev_url' => null,
                 'next_url' => url($this->endpoint . '?' . http_build_query([
                     'page' => 2,
@@ -168,6 +169,38 @@ abstract class ApiTestCase extends BaseTestCase
 
         $response->assertJson(fn ($json) => $json
             ->has('data', 5)
+            ->etc()
+        );
+    }
+
+    public function test_it_shows_last_page_on_listing()
+    {
+        ($this->model)::factory()->count(12)->create();
+
+        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+            'limit' => 5,
+            'page' => 3,
+        ]));
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'pagination' => [
+                'total' => 12,
+                'limit' => 5,
+                'offset' => 10,
+                'current_page' => 3,
+                'total_pages' => 3,
+                'prev_url' => url($this->endpoint . '?' . http_build_query([
+                    'page' => 2,
+                    'limit' => 5,
+                ])),
+                'next_url' => null,
+            ],
+        ]);
+
+        $response->assertJson(fn ($json) => $json
+            ->has('data', 2)
             ->etc()
         );
     }
