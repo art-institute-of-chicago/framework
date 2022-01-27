@@ -136,4 +136,39 @@ abstract class ApiTestCase extends BaseTestCase
             ->etc()
         );
     }
+
+    public function test_it_shows_middle_page_on_listing()
+    {
+        ($this->model)::factory()->count(12)->create();
+
+        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+            'limit' => 5,
+            'page' => 2,
+        ]));
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'pagination' => [
+                'total' => 12,
+                'limit' => 5,
+                'offset' => 5,
+                'current_page' => 2,
+                'total_pages' => 3,
+                'prev_url' => url($this->endpoint . '?' . http_build_query([
+                    'page' => 1,
+                    'limit' => 5,
+                ])),
+                'next_url' => url($this->endpoint . '?' . http_build_query([
+                    'page' => 3,
+                    'limit' => 5,
+                ])),
+            ],
+        ]);
+
+        $response->assertJson(fn ($json) => $json
+            ->has('data', 5)
+            ->etc()
+        );
+    }
 }
