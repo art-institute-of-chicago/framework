@@ -3,7 +3,7 @@
 namespace Aic\Hub\Foundation\Testing;
 
 use Aic\Hub\Foundation\Testing\Concerns\HasEndpoint;
-use Aic\Hub\Foundation\Testing\ApiTestCase as BaseTestCase;
+use Aic\Hub\Foundation\Testing\ResourceTestCase as BaseTestCase;
 
 abstract class EndpointTestCase extends BaseTestCase
 {

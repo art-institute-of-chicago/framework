@@ -8,7 +8,7 @@ use Aic\Hub\Foundation\Testing\Concerns\HasFields;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-abstract class ApiTestCase extends BaseTestCase
+abstract class ResourceTestCase extends BaseTestCase
 {
     use HasAbstractProperties;
 
