@@ -6,6 +6,8 @@ use Aic\Hub\Foundation\Concerns\HasAbstractProperties;
 
 trait HasEndpoint
 {
+    use HasAbstractProperties;
+
     /**
      * Required. Ex: 'app/v1/artworks'
      */
@@ -30,6 +32,11 @@ trait HasEndpoint
                 'title',
             ],
         ]);
+
+        $response->assertJson(fn ($json) => $json
+            ->has('data', fn ($json) => $this->validateFields($json))
+            ->etc()
+        );
     }
 
     public function test_it_400s_on_detail_if_id_is_invalid()
