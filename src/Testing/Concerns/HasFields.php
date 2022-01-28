@@ -58,6 +58,10 @@ trait HasFields
                     $this->validateFields($json, $expected);
                 });
             }
+
+            if ($expected === null) {
+                $json->has($key);
+            }
         }
     }
 
