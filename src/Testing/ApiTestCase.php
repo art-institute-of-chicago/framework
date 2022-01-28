@@ -4,7 +4,6 @@ namespace Aic\Hub\Foundation\Testing;
 
 use Tests\CreatesApplication;
 use Aic\Hub\Foundation\Concerns\HasAbstractProperties;
-use Aic\Hub\Foundation\Testing\Concerns\HasEndpoint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -23,13 +22,6 @@ abstract class ApiTestCase extends BaseTestCase
      * @link https://laravel.com/docs/8.x/database-testing#resetting-the-database-after-each-test
      */
     use RefreshDatabase;
-
-    /**
-     * Define `protected $endpoint` in child classes.
-     *
-     * @todo Consider making endpoint optional, e.g. for testing pivots.
-     */
-    use HasEndpoint;
 
     /**
      * Required. Ex: \App\Models\Artworks::class
