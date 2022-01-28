@@ -2,11 +2,35 @@
 
 namespace Aic\Hub\Foundation\Testing\Concerns\Endpoint;
 
+use Illuminate\Testing\TestResponse;
+
 trait ShowsListing
 {
+    protected function getListing(array $params = []): TestResponse
+    {
+        $uri = $this->endpoint;
+
+        if ($query = http_build_query($params)) {
+            $uri .= '?' . $query;
+        }
+
+        return $this->getJson($uri);
+    }
+
+    private function getPageUrl(array $params = []): string
+    {
+        $uri = $this->endpoint;
+
+        if ($query = http_build_query($params)) {
+            $uri .= '?' . $query;
+        }
+
+        return url($uri);
+    }
+
     public function test_it_shows_empty_listing()
     {
-        $response = $this->getJson($this->endpoint);
+        $response = $this->getListing();
 
         $response->assertStatus(200);
 
@@ -36,10 +60,10 @@ trait ShowsListing
     {
         ($this->model)::factory()->count(12)->create();
 
-        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+        $response = $this->getListing([
             'limit' => 5,
             'page' => 1,
-        ]));
+        ]);
 
         $response->assertStatus(200);
 
@@ -51,10 +75,10 @@ trait ShowsListing
                 'current_page' => 1,
                 'total_pages' => 3,
                 'prev_url' => null,
-                'next_url' => url($this->endpoint . '?' . http_build_query([
+                'next_url' => $this->getPageUrl([
                     'page' => 2,
                     'limit' => 5,
-                ])),
+                ]),
             ],
         ]);
 
@@ -68,10 +92,10 @@ trait ShowsListing
     {
         ($this->model)::factory()->count(12)->create();
 
-        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+        $response = $this->getListing([
             'limit' => 5,
             'page' => 2,
-        ]));
+        ]);
 
         $response->assertStatus(200);
 
@@ -82,14 +106,14 @@ trait ShowsListing
                 'offset' => 5,
                 'current_page' => 2,
                 'total_pages' => 3,
-                'prev_url' => url($this->endpoint . '?' . http_build_query([
+                'prev_url' => $this->getPageUrl([
                     'page' => 1,
                     'limit' => 5,
-                ])),
-                'next_url' => url($this->endpoint . '?' . http_build_query([
+                ]),
+                'next_url' => $this->getPageUrl([
                     'page' => 3,
                     'limit' => 5,
-                ])),
+                ]),
             ],
         ]);
 
@@ -103,10 +127,10 @@ trait ShowsListing
     {
         ($this->model)::factory()->count(12)->create();
 
-        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+        $response = $this->getListing([
             'limit' => 5,
             'page' => 3,
-        ]));
+        ]);
 
         $response->assertStatus(200);
 
@@ -117,10 +141,10 @@ trait ShowsListing
                 'offset' => 10,
                 'current_page' => 3,
                 'total_pages' => 3,
-                'prev_url' => url($this->endpoint . '?' . http_build_query([
+                'prev_url' => $this->getPageUrl([
                     'page' => 2,
                     'limit' => 5,
-                ])),
+                ]),
                 'next_url' => null,
             ],
         ]);
@@ -136,9 +160,9 @@ trait ShowsListing
      */
     public function test_it_403s_if_limit_is_too_high()
     {
-        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+        $response = $this->getListing([
             'limit' => 1001,
-        ]));
+        ]);
 
         $response->assertStatus(403);
     }

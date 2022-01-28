@@ -5,7 +5,7 @@ namespace Aic\Hub\Foundation\Testing\Concerns\Endpoint;
 trait ShowsMultiple
 {
     /**
-     * The `ids` could be an array, or a string with comma-separated ids.
+     * The `ids` param could be an array or a comma-separated string.
      */
     private function it_shows_multiple(callable $getIdsParam)
     {
@@ -14,9 +14,9 @@ trait ShowsMultiple
         $key = $items->first()->getKeyName();
         $shownIds = $items->slice(0, 13)->pluck($key)->all();
 
-        $response = $this->getJson($this->endpoint . '?' . http_build_query([
+        $response = $this->getListing([
             'ids' => $getIdsParam($shownIds),
-        ]));
+        ]);
 
         $response->assertStatus(200);
 

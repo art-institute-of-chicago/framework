@@ -2,13 +2,20 @@
 
 namespace Aic\Hub\Foundation\Testing\Concerns\Endpoint;
 
+use Illuminate\Testing\TestResponse;
+
 trait ShowsDetail
 {
+    protected function getDetail($id): TestResponse
+    {
+        return $this->getJson($this->endpoint . '/' . $id);
+    }
+
     public function test_it_shows_detail()
     {
         $item = ($this->model)::factory()->create();
 
-        $response = $this->getJson($this->endpoint . '/' . $item->id);
+        $response = $this->getDetail($item->id);
 
         $response->assertStatus(200);
 
@@ -29,7 +36,7 @@ trait ShowsDetail
     {
         $id = ($this->model)::factory()->getInvalidId();
 
-        $response = $this->getJson($this->endpoint . '/' . $id);
+        $response = $this->getDetail($id);
 
         $response->assertStatus(400);
     }
@@ -38,7 +45,7 @@ trait ShowsDetail
     {
         $id = ($this->model)::factory()->getValidId();
 
-        $response = $this->getJson($this->endpoint . '/' . $id);
+        $response = $this->getDetail($id);
 
         $response->assertStatus(404);
     }
