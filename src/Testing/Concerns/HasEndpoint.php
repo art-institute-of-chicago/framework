@@ -10,6 +10,7 @@ trait HasEndpoint
     use Endpoint\ShowsDetail;
     use Endpoint\ShowsListing;
     use Endpoint\ShowsMultiple;
+    use Endpoint\HasFieldsParam;
 
     /**
      * Required. Ex: 'app/v1/artworks'

@@ -6,9 +6,15 @@ use Illuminate\Testing\TestResponse;
 
 trait ShowsDetail
 {
-    protected function getDetail($id): TestResponse
+    protected function getDetail($id, array $params = []): TestResponse
     {
-        return $this->getJson($this->endpoint . '/' . $id);
+        $uri = $this->endpoint . '/' . $id;
+
+        if ($query = http_build_query($params)) {
+            $uri .= '?' . $query;
+        }
+
+        return $this->getJson($uri);
     }
 
     public function test_it_shows_detail()
