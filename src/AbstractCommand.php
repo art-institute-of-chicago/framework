@@ -17,6 +17,22 @@ abstract class AbstractCommand extends Command
     abstract public function handle();
 
     /**
+     * For each trait attached to the command, check if there's a method named
+     * `init{TraitName}`. If so, run it! We can use this to e.g. add the same
+     * set of options to multiple commands using a trait.
+     */
+    public function __construct()
+    {
+        parent::__construct(...func_get_args());
+
+        foreach (class_uses_recursive($this) as $trait) {
+            if (method_exists($this, $method = 'init' . class_basename($trait))) {
+                $this->{$method}();
+            }
+        }
+    }
+
+    /**
      * Here, we've extended the inherited execute method, which allows us to log times
      * for each command call. You can use `handle` in child classes as normal.
      *
