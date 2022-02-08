@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Foundation\Commands;
+namespace Aic\Hub\Foundation\Console\Commands;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;

@@ -10,8 +10,8 @@ class CommandServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Aic\Hub\Foundation\Commands\DatabaseReset::class,
-                \Aic\Hub\Foundation\Commands\MakeUser::class,
+                \Aic\Hub\Foundation\Console\Commands\DatabaseReset::class,
+                \Aic\Hub\Foundation\Console\Commands\MakeUser::class,
             ]);
         }
     }

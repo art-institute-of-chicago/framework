@@ -1,6 +1,6 @@
 <?php
 
-namespace Aic\Hub\Foundation\Commands;
+namespace Aic\Hub\Foundation\Console\Commands;
 
 use Aic\Hub\Foundation\User;
 use Illuminate\Support\Str;
