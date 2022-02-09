@@ -2,7 +2,7 @@
 
 namespace Aic\Hub\Foundation\Console\Commands;
 
-use Aic\Hub\Foundation\User;
+use Aic\Hub\Foundation\Models\User;
 use Illuminate\Support\Str;
 
 use Aic\Hub\Foundation\AbstractCommand as BaseCommand;
