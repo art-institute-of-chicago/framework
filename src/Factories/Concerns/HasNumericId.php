@@ -6,11 +6,16 @@ trait HasNumericId
 {
     public function getValidId()
     {
-        return $this->faker->unique()->randomNumber(6);
+        return $this->getNumericId();
     }
 
     public function getInvalidId()
     {
         return $this->faker->uuid();
+    }
+
+    protected function getNumericId()
+    {
+        return $this->faker->unique()->randomNumber(6);
     }
 }
