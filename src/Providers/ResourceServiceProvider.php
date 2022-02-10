@@ -108,9 +108,6 @@ class ResourceServiceProvider extends ServiceProvider
                 $headers
             );
         });
-
-        // MySQL compatibility
-        Schema::defaultStringLength(191);
     }
 
     /**
