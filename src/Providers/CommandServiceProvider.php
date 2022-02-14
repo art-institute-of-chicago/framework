@@ -12,6 +12,7 @@ class CommandServiceProvider extends ServiceProvider
             $this->commands([
                 \Aic\Hub\Foundation\Console\Commands\DatabaseReset::class,
                 \Aic\Hub\Foundation\Console\Commands\MakeUser::class,
+                \Aic\Hub\Foundation\Console\Commands\UpdateCloudfrontIps::class,
             ]);
         }
     }
