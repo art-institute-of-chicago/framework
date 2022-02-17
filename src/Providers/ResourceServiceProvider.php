@@ -6,7 +6,6 @@ use Aic\Hub\Foundation\ResourceSerializer;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 use League\Fractal\TransformerAbstract;

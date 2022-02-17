@@ -52,7 +52,10 @@ class HttpKernel extends BaseKernel
             'json',
         ],
         'web' => [
-            // Needed for Laravel Horizon
+            // Needed for e.g. the enhancer
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            // ...also needed for Laravel Horizon
         ],
     ];
 
