@@ -70,5 +70,6 @@ class HttpKernel extends BaseKernel
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'json' => \Aic\Hub\Foundation\Middleware\ForceAcceptJson::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'basic_auth' => \Aic\Hub\Foundation\Middleware\BasicAuthMiddleware::class,
     ];
 }

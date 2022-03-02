@@ -61,4 +61,17 @@ return [
     'proxy_url' => env('PROXY_URL', env('APP_URL', 'http://localhost')),
 
     'proxy_scheme' => env('PROXY_SCHEME', 'http'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Basic HTTP Auth
+    |--------------------------------------------------------------------------
+    |
+    | Use the `basic_auth` middleware to secure routes.
+    |
+    */
+    'basic_auth' => [
+        'username' => env('BASIC_AUTH_USERNAME'),
+        'password' => env('BASIC_AUTH_PASSWORD'),
+    ],
 ];
