@@ -45,6 +45,18 @@ trait ShowsDetail
         );
     }
 
+    public function test_it_shows_detail_with_valid_fields_when_nullable()
+    {
+        $item = ($this->model)::factory()->nullable()->create();
+
+        $response = $this->getDetail($item->id);
+
+        $response->assertJson(fn ($json) => $json
+            ->has('data', fn ($json) => $this->validateFields($json))
+            ->etc()
+        );
+    }
+
     public function test_it_400s_on_detail_if_id_is_invalid()
     {
         $id = ($this->model)::factory()->getInvalidId();
