@@ -31,6 +31,13 @@ trait ShowsDetail
                 'title',
             ],
         ]);
+    }
+
+    public function test_it_shows_detail_with_valid_fields()
+    {
+        $item = ($this->model)::factory()->create();
+
+        $response = $this->getDetail($item->id);
 
         $response->assertJson(fn ($json) => $json
             ->has('data', fn ($json) => $this->validateFields($json))
