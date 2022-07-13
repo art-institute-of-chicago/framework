@@ -2,6 +2,7 @@
 
 namespace Aic\Hub\Foundation\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -61,7 +62,7 @@ class DatabaseReset extends BaseCommand
             $table_name = $table_array[key($table_array)];
 
             // TODO: Require laravel\helpers upon upgrade to [5.8]?
-            if (!empty($table_prefix) && !starts_with($table_name, $table_prefix)) {
+            if (!empty($table_prefix) && !Str::startsWith($table_name, $table_prefix)) {
                 $this->line('<fg=blue>Skipping ' . $table_name . '</>');
                 continue;
             }
