@@ -1,0 +1,21 @@
+diff --git a/lib/Doctrine/DBAL/Platforms/MySqlPlatform.php b/lib/Doctrine/DBAL/Platforms/MySqlPlatform.php
+index 8d338c8405ee66a4cd61080eddcc150d9fd88294..1aee270ff506a9fc9567f96b30c2b9e1207e9140 100644
+--- a/lib/Doctrine/DBAL/Platforms/MySqlPlatform.php
++++ b/lib/Doctrine/DBAL/Platforms/MySqlPlatform.php
+@@ -598,8 +598,15 @@ SQL
+             }
+ 
+             $columnArray['comment'] = $this->getColumnComment($column);
+-            $queryParts[]           =  'CHANGE ' . ($columnDiff->getOldColumnName()->getQuotedName($this)) . ' '
++
++            $queryPart = 'CHANGE ' . ($columnDiff->getOldColumnName()->getQuotedName($this)) . ' '
+                     . $this->getColumnDeclarationSQL($column->getQuotedName($this), $columnArray);
++
++            if (isset($columnArray['after']) && $columnArray['after']) {
++                $queryPart .= ' AFTER ' . $columnArray['after'];
++            }
++
++            $queryParts[] = $queryPart;
+         }
+ 
+         foreach ($diff->renamedColumns as $oldColumnName => $column) {

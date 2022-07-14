@@ -76,6 +76,12 @@
                     "title": "API-45: Fix arrow functions in method_chaining_indentation",
                     "url": "vendor/aic/data-hub-foundation/patches/API-45---fix-arrow-functions-in-method-chaining-indentation.diff"
                 }
+            ],
+            "doctrine/dbal": [
+                {
+                    "title": "API-316: Support reorder of database columns",
+                    "url": "vendor/aic/data-hub-foundation/patches/API-316---support-reorder-of-database-columns.diff"
+                }
             ]
         }
     },
