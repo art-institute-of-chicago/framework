@@ -5,8 +5,6 @@ $finder = PhpCsFixer\Finder::create()
         '.git',
         'bootstrap/cache',
         'node_modules',
-        'public',
-        'resources/lang',
         'storage',
         'vendor',
     ])
