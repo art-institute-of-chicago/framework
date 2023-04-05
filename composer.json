@@ -2,40 +2,15 @@
     "name": "aic/data-hub-foundation",
     "description": "Shared components for our data hub services.",
     "type": "library",
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "type": "metapackage",
-                "name": "vendor/package-patches-dev",
-                "version": "1.0.0",
-                "require": {
-                    "netresearch/composer-patches-plugin": "^1.3.1"
-                },
-                "extra": {
-                    "patches": {
-                        "friendsofphp/php-cs-fixer": [
-                            {
-                                "title": "API-45: Fix arrow functions in method_chaining_indentation",
-                                "url": "patches/API-45---fix-arrow-functions-in-method-chaining-indentation.diff"
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-    ],
     "require": {
         "php": "^7.3|^8.0",
-        "laravel/framework": "*",
-        "fruitcake/laravel-cors": "^2.0",
-        "league/fractal": "^0.16.0",
         "doctrine/dbal": "^2.6",
-        "netresearch/composer-patches-plugin": "^1.3.1"
-    },
-    "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
-        "vendor/package-patches-dev": "~1.0"
+        "fruitcake/laravel-cors": "^2.0",
+        "laravel/framework": "*",
+        "league/fractal": "^0.16.0",
+        "netresearch/composer-patches-plugin": "^1.3.1",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "license": "AGPL-3.0",
     "authors": [
@@ -71,12 +46,6 @@
                     "url": "vendor/aic/data-hub-foundation/patches/API-227---remove-comments-from-migration-stubs.diff"
                 }
             ],
-            "friendsofphp/php-cs-fixer": [
-                {
-                    "title": "API-45: Fix arrow functions in method_chaining_indentation",
-                    "url": "vendor/aic/data-hub-foundation/patches/API-45---fix-arrow-functions-in-method-chaining-indentation.diff"
-                }
-            ],
             "doctrine/dbal": [
                 {
                     "title": "API-316: Support reorder of database columns",
@@ -88,6 +57,7 @@
     "config": {
         "allow-plugins": {
             "netresearch/composer-patches-plugin": true
-        }
+        },
+        "sort-packages": true
     }
 }
