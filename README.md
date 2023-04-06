@@ -17,19 +17,33 @@ The [data aggregator](https://github.com/art-institute-of-chicago/data-aggregato
 * PHP 7.2.5 or greater
 * Laravel 7.0.0 or greater
 
-## Installing
+# Installing
 
-To install in your app, add the following to you composer.json:
-
+To install in your project, run
+`composer require aic/data-hub-foundation:dev-laravel-8-support`, or add the
+following to the `composer.json` and then run `composer update`:
 ```json
 "require": {
-    "aic/data-hub-foundation": "dev-master",
+    "aic/data-hub-foundation": "dev-laravel-8-support",
 }
 ```
 
-This will require the package to your app and keep it in sync with the latest commit on our `master` branch.
-
-Then run `composer require aic/data-hub-foundation`. This will install the package in your `vendor` director.
+To utilize formatting and linting in your project, add the following to the
+`composer.json`:
+```json
+"scripts" : {
+    "format": [
+        "@putenv COMPOSER=vendor/aic/data-hub-foundation/composer.json",
+        "@composer format"
+    ],
+    "lint": [
+        "@putenv COMPOSER=vendor/aic/data-hub-foundation/composer.json",
+        "@composer lint"
+    ]
+}
+```
+These scripts can be run in your project  with `composer lint` and
+`composer format`.
 
 ## Developing
 
