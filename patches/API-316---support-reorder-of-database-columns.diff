@@ -3,11 +3,11 @@ index 73badf7f2..ebe9f3dec 100644
 --- a/src/Platforms/AbstractMySQLPlatform.php
 +++ b/src/Platforms/AbstractMySQLPlatform.php
 @@ -658,8 +658,14 @@ SQL
- 
+
              $oldColumn = $columnDiff->getOldColumn() ?? $columnDiff->getOldColumnName();
- 
+
 -            $queryParts[] =  'CHANGE ' . $oldColumn->getQuotedName($this) . ' '
-+            $queryParts =  'CHANGE ' . $oldColumn->getQuotedName($this) . ' '
++            $queryPart =  'CHANGE ' . $oldColumn->getQuotedName($this) . ' '
                  . $this->getColumnDeclarationSQL($newColumn->getQuotedName($this), $newColumnProperties);
 +
 +            if (isset($columnArray['after']) && $columnArray['after']) {
@@ -16,14 +16,14 @@ index 73badf7f2..ebe9f3dec 100644
 +
 +            $queryParts[] = $queryPart;
          }
- 
+
          foreach ($diff->getRenamedColumns() as $oldColumnName => $column) {
 @@ -673,8 +679,14 @@ SQL
                  'comment' => $this->getColumnComment($column),
              ]);
- 
+
 -            $queryParts[] = 'CHANGE ' . $oldColumnName->getQuotedName($this) . ' '
-+            $queryParts = 'CHANGE ' . $oldColumnName->getQuotedName($this) . ' '
++            $queryPart = 'CHANGE ' . $oldColumnName->getQuotedName($this) . ' '
                  . $this->getColumnDeclarationSQL($column->getQuotedName($this), $columnProperties);
 +
 +            if (isset($columnArray['after']) && $columnArray['after']) {
@@ -32,5 +32,5 @@ index 73badf7f2..ebe9f3dec 100644
 +
 +            $queryParts[] = $queryPart;
          }
- 
+
          $addedIndexes    = $this->indexAssetsByLowerCaseName($diff->getAddedIndexes());
