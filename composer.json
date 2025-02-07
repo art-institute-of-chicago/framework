@@ -39,7 +39,7 @@
             "phpcs --standard=vendor/aic/data-hub-foundation/phpcs.dist.xml --warning-severity=0 ."
         ],
         "analyze": [
-            "./vendor/bin/phpstan analyze"
+            "phpstan analyze --configuration=vendor/aic/data-hub-foundation/phpstan.neon.dist"
         ]
     },
     "extra": {
