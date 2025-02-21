@@ -41,7 +41,7 @@ abstract class AbstractCommand extends Command
      *
      * @return mixed
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $start = microtime(TRUE);
 
